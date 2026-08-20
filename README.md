@@ -1,4 +1,4 @@
-# lodestone-css-selectors
+# Lodestone Selectors
 
 A collection of pre-defined CSS selectors and XPath expressions optimized for extracting Final Fantasy XIV Lodestone data in lightweight, server-side environments.
 
@@ -28,3 +28,7 @@ _Providing both gives developers the flexibility to choose the best strategy for
 - **Language-Agnostic:** Standard JSON allows non-TypeScript environments (Python, Rust, Go, Ruby) to easily consume the selectors.
 - **DOMless Efficiency:** Lightweight HTML parsers (like Cheerio or Happy DOM) can read raw JSON configurations instantly without the overhead of a full browser engine.
 - **Automated Sync:** Schema compilation guarantees that TypeScript definitions and raw JSON exports remain strictly aligned without manual upkeep.
+
+## Contributing
+
+Contributions are welcome! If you want to update or add new selectors, simply submit a Pull Request with your changes to the TypeScript/Zod source schemas. You do not need to manually edit or recompile the output files &ndash; our CI pipeline will automatically generate and commit the updated JSON files upon merge.
