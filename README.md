@@ -2,8 +2,6 @@
 
 A collection of pre-defined CSS selectors and XPath expressions optimized for extracting Final Fantasy XIV Lodestone data in lightweight, server-side environments.
 
----
-
 ## What This Project Does
 
 This repository provides a ready-to-use map of target paths for scraping character, free company, and event data from the FFXIV Lodestone. Instead of manually inspecting HTML structures and writing parsers from scratch, developers can import these pre-built, typed definitions directly into their projects.
