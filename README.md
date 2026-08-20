@@ -1,57 +1,32 @@
 # lodestone-css-selectors
-CSS selectors for The Lodestone. These selectors are all made for non-browser clients; they may break in various browsers
-due to DOM elements being injected by the browser itself. Please test them in a parser before reporting any errors.
 
-## Character Profile
-Do note that in Firefox, some page elements are slightly different from in other browsers. Use no user agent or try the provided ones in `meta.json`, for the most accurate results against the selectors it is recommended to use the value of `userAgentMobile`.
+A collection of pre-defined CSS selectors and XPath expressions optimized for extracting Final Fantasy XIV Lodestone data in lightweight, server-side environments.
 
-### Character info (`profile/character.json`)
-Basic character data is on the main profile page.
+---
 
-### Attributes (`profile/attributes.json`)
-Attribute data is on the main profile page.
+## What This Project Does
 
-### Gearset (`profile/gearset.json`)
-Gearset data is on the main profile page.
+This repository provides a ready-to-use map of target paths for scraping character, free company, and event data from the FFXIV Lodestone. Instead of manually inspecting HTML structures and writing parsers from scratch, developers can import these pre-built, typed definitions directly into their projects.
 
-### Classjobs (`profile/classjob.json`)
-Classjob data is on the `/class_job` endpoint.
+## Lineage & Architecture
 
-### Mounts/Minions (`profile/minion.json` and `profile/mount.json`)
-Mount and minion data are on their own `/mount` and `/minion` endpoints, and need to be scraped using a mobile user agent. With a desktop UA, the mount/minion names are
-injected into the page with AJAX, and separate requests need to be made to get every single one.
+Following the merge of [`miichom/lodestone`](https://github.com/miichom/lodestone) (now integrated into [`xivapi/nodestone`](https://github.com/xivapi/nodestone) via [#20](https://github.com/xivapi/nodestone/issues/20)), this repository inherits a core design philosophy built specifically around **XPath** queries and **Zod** validation. While CSS selectors were added for broader utility, XPath and Zod remain foundational to how the schemas are structured and verified as the single source of truth.
 
-### Achievements (`profile/achievements.json`)
-Achievements are on the `/achievement` endpoint. Use the list selector to get the list of achievements on the page, and then get their IDs from the `href` attribute
-of the link. Use the next button's selector to request the next page and scrape the next set of achievements until the href is `javascript:void(0);`.
+## Core Concepts
 
-## Types
+### Why Use CSS Selectors & XPath?
 
-All selectors are accompanied by a `type` field, which specifies what the expected type is for the field. At current, only the following types are used:
+To pull specific information from a web page &ndash; such as a character's level, job, or equipment &ndash; your code needs a precise way to locate elements within the HTML:
 
-| Name      | Description                                                                           |
-| --------- | ------------------------------------------------------------------------------------- |
-| `integer` | The type is an integer                                                                |
-| `string`  | The type is a string                                                                  |
-| `boolean` | The type is expected to be `true` if the selector returns a result; `false` otherwise |
+- **XPath Queries:** The original foundation of the project. Advanced search expressions capable of complex logic that CSS cannot handle, such as finding elements by exact text content or navigating upward through parent nodes.
+- **CSS Selectors:** Fast, clean, and ideal for standard, direct element targeting (e.g., matching a class like `.character__name`).
 
-There are two formats for type:
+_Providing both gives developers the flexibility to choose the best strategy for their specific parsing tools._
 
-* Common form - the selector is of this type
+### Why Zod Outputs to JSON
 
-```json
-{
-    "type": "integer"
-}
-```
+[Zod](https://zod.dev/) serves as the single source of truth for runtime validation and static inference, automatically compiling into standard JSON schemas:
 
-* Multiple value form - the selector results in multiple named values; this is only used with regex selectors that have named groups
-
-```json
-{
-    "type": {
-        "Server": "string",
-        "DC": "string"
-    }
-}
-```
+- **Language-Agnostic:** Standard JSON allows non-TypeScript environments (Python, Rust, Go, Ruby) to easily consume the selectors.
+- **DOMless Efficiency:** Lightweight HTML parsers (like Cheerio or Happy DOM) can read raw JSON configurations instantly without the overhead of a full browser engine.
+- **Automated Sync:** Schema compilation guarantees that TypeScript definitions and raw JSON exports remain strictly aligned without manual upkeep.

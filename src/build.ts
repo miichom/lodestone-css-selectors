@@ -1,0 +1,60 @@
+import fs from "node:fs/promises";
+import path from "node:path";
+import consola from "consola";
+import pc from "picocolors";
+import { isCI } from "std-env";
+import { z } from "zod/v4";
+import * as schemas from "./schemas/index.ts";
+
+async function build() {
+  const dir = path.resolve(process.cwd(), "json");
+
+  consola.start(`Preparing build directory: ${pc.dim(dir)}`);
+  await fs.rm(dir, { recursive: true, force: true });
+  await fs.mkdir(dir, { recursive: true });
+
+  const entries = Object.entries(schemas);
+
+  consola.info(
+    `Building bundled JSON Schemas for ${pc.bold(entries.length.toString())} modules...`
+  );
+
+  for (const [name, module] of entries) {
+    const filename = `${name.toLowerCase()}.json`;
+    const pathname = path.join(dir, filename);
+
+    const schema: Record<string, z.ZodType> = {};
+    if (typeof module === "object" && module !== null) {
+      for (const [key, value] of Object.entries(module)) {
+        if (value instanceof z.ZodType) {
+          schema[key] = value;
+        }
+      }
+    }
+
+    if (Object.keys(schema).length === 0) {
+      consola.warn(`Skipping module without Zod exports: ${name}`);
+      continue;
+    }
+
+    const output = Object.fromEntries(
+      Object.entries(schema).map(([key, value]) => {
+        const json = value.toJSONSchema({ unrepresentable: "any" });
+        return [key, json];
+      })
+    );
+
+    await fs.writeFile(pathname, JSON.stringify(output, null, 2), "utf-8");
+
+    if (!isCI) consola.success(`Wrote ${pc.cyan(filename)}`);
+  }
+
+  consola.ready(
+    `${pc.green("Build complete!")} Artifacts generated in ${pc.dim(dir)}`
+  );
+}
+
+build().catch((err) => {
+  consola.error("Build process failed:", err);
+  process.exit(1);
+});

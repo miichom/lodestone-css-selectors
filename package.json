@@ -1,0 +1,31 @@
+{
+  "name": "@xivapi/lodestone-css-selectors",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./index.ts",
+    "./json/*": "./json/*.json"
+  },
+  "main": "./index.ts",
+  "scripts": {
+    "build": "tsx src/build.ts",
+    "format": "biome format --write",
+    "lint": "biome check --write"
+  },
+  "dependencies": {
+    "@miichom/xpath2css": "^0.1.4",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.9",
+    "@changesets/cli": "^3.0.1",
+    "@tsconfig/node22": "^22.0.6",
+    "@types/node": "^26.2.0",
+    "consola": "^3.4.2",
+    "picocolors": "^1.1.1",
+    "std-env": "^4.2.0",
+    "tsx": "^4.23.12",
+    "typescript": "^7.0.2"
+  }
+}
