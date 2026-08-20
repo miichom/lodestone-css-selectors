@@ -1,0 +1,287 @@
+{
+  "entries": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "array",
+    "items": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "xpath": "/a",
+          "attribute": "href",
+          "regex": "lodestone\\/linkshell\\/(\\S+)\\/",
+          "css": "a"
+        },
+        "name": {
+          "type": "string",
+          "xpath": "//p[@class='entry__name']",
+          "css": "p.entry__name"
+        },
+        "worldname": {
+          "type": "string",
+          "xpath": "//p[@class='entry__world']",
+          "regex": "(\\w+) \\[\\w+\\]",
+          "css": "p.entry__world"
+        },
+        "dcname": {
+          "type": "string",
+          "xpath": "//p[@class='entry__world']",
+          "regex": "\\w+ \\[(\\w+)\\]",
+          "css": "p.entry__world"
+        },
+        "members": {
+          "type": "number",
+          "xpath": "//div[@class='entry__linkshell__member']//span",
+          "css": "div.entry__linkshell__member span"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "worldname",
+        "dcname",
+        "members"
+      ],
+      "additionalProperties": false
+    },
+    "xpath": "//div[@class='ldst__window']//div[@class='entry']",
+    "css": "div.ldst__window div.entry"
+  },
+  "profile": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string",
+        "xpath": "//h3[@class='heading__linkshell__name']",
+        "css": "h3.heading__linkshell__name"
+      },
+      "icon": {
+        "type": "string",
+        "format": "uri",
+        "xpath": "//div[@class='heading__linkshell__icon']/img",
+        "attribute": "src",
+        "css": "div.heading__linkshell__icon > img"
+      },
+      "members": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "xpath": "/a[@class='entry__link']",
+              "attribute": "href",
+              "regex": "lodestone\\/character\\/(\\S+)\\/",
+              "css": "a.entry__link"
+            },
+            "name": {
+              "type": "string",
+              "xpath": "//p[@class='entry__name']",
+              "css": "p.entry__name"
+            },
+            "avatar": {
+              "type": "string",
+              "format": "uri",
+              "xpath": "//div[@class='entry__chara__face']/img",
+              "attribute": "src",
+              "css": "div.entry__chara__face > img"
+            },
+            "worldname": {
+              "type": "string",
+              "xpath": "//p[@class='entry__world']",
+              "regex": "(\\w+) \\[\\w+\\]",
+              "css": "p.entry__world"
+            },
+            "dcname": {
+              "type": "string",
+              "xpath": "//p[@class='entry__world']",
+              "regex": "\\w+ \\[(\\w+)\\]",
+              "css": "p.entry__world"
+            },
+            "rank": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "xpath": "//div[@class='entry__chara_info__linkshell']/span",
+                  "css": "div.entry__chara_info__linkshell > span"
+                },
+                "icon": {
+                  "type": "string",
+                  "format": "uri",
+                  "xpath": "//div[@class='entry__chara_info__linkshell']/img",
+                  "attribute": "src",
+                  "css": "div.entry__chara_info__linkshell > img"
+                }
+              },
+              "required": [
+                "name",
+                "icon"
+              ],
+              "additionalProperties": false
+            },
+            "grandcompany": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "xpath": "//li[@class='js__tooltip']",
+                  "attribute": "data-tooltip",
+                  "regex": "(\\D+) \\/ \\D+",
+                  "css": "li.js__tooltip"
+                },
+                "rank": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "xpath": "//li[@class='js__tooltip']",
+                      "attribute": "data-tooltip",
+                      "regex": "\\D+ \\/ (\\D+)",
+                      "css": "li.js__tooltip"
+                    },
+                    "icon": {
+                      "type": "string",
+                      "format": "uri",
+                      "xpath": "//li[@class='js__tooltip']/img",
+                      "attribute": "src",
+                      "css": "li.js__tooltip > img"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "icon"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "name",
+                "rank"
+              ],
+              "additionalProperties": false
+            },
+            "freecompany": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "xpath": "/a[@class='entry__freecompany__link']",
+                  "attribute": "href",
+                  "regex": "lodestone\\/freecompany\\/(\\S+)\\/",
+                  "css": "a.entry__freecompany__link"
+                },
+                "name": {
+                  "type": "string",
+                  "xpath": "/a[@class='entry__freecompany__link']/span",
+                  "css": "a.entry__freecompany__link > span"
+                },
+                "crest": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "xpath": "/a[@class='entry__freecompany__link']//img",
+                  "attribute": "src",
+                  "css": "a.entry__freecompany__link img"
+                }
+              },
+              "required": [
+                "id",
+                "name",
+                "crest"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "id",
+            "name",
+            "avatar",
+            "worldname",
+            "dcname"
+          ],
+          "additionalProperties": false
+        },
+        "xpath": "//div[@class='ls__member']/div[@class='entry']",
+        "css": "div.ls__member > div.entry"
+      }
+    },
+    "required": [
+      "name",
+      "icon",
+      "members"
+    ],
+    "additionalProperties": false
+  },
+  "query": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "q": {
+        "type": "string"
+      },
+      "cf_public": {
+        "type": "boolean"
+      },
+      "worldname": {
+        "anyOf": [
+          {
+            "type": "string",
+            "enum": [
+              "_region_1",
+              "_region_2",
+              "_region_3",
+              "_region_4"
+            ]
+          },
+          {
+            "type": "string",
+            "enum": [
+              "_dc_Aether",
+              "_dc_Crystal",
+              "_dc_Dynamis",
+              "_dc_Primal",
+              "_dc_Chaos",
+              "_dc_Light",
+              "_dc_Materia",
+              "_dc_Elemental",
+              "_dc_Gaia",
+              "_dc_Mana",
+              "_dc_Meteor"
+            ]
+          },
+          {
+            "type": "string",
+            "pattern": "^[A-Za-z]+$"
+          }
+        ]
+      },
+      "character_count": {
+        "type": "string",
+        "enum": [
+          "1-10",
+          "11-30",
+          "31-50",
+          "51-"
+        ]
+      },
+      "order": {
+        "type": "number",
+        "minimum": 1,
+        "maximum": 6
+      },
+      "page": {
+        "type": "number",
+        "minimum": 1,
+        "maximum": 20
+      }
+    },
+    "required": [
+      "q"
+    ],
+    "additionalProperties": false
+  }
+}

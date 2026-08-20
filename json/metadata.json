@@ -1,0 +1,51 @@
+{
+  "pagination": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "start": {
+        "type": "string",
+        "xpath": "//a[@class='btn__pager__prev--all']",
+        "css": "a.btn__pager__prev--all"
+      },
+      "previous": {
+        "type": "string",
+        "xpath": "//a[@class='btn__pager__prev']",
+        "css": "a.btn__pager__prev"
+      },
+      "current": {
+        "type": "number",
+        "xpath": "//a[@class='btn__pager__current']",
+        "regex": "(\\d+)",
+        "css": "a.btn__pager__current"
+      },
+      "pages": {
+        "type": "number",
+        "xpath": "//a[@class='btn__pager__current']",
+        "regex": "(\\d+)",
+        "css": "a.btn__pager__current"
+      },
+      "next": {
+        "type": "string",
+        "xpath": "//a[@class='btn__pager__next']",
+        "css": "a.btn__pager__next"
+      },
+      "end": {
+        "type": "string",
+        "xpath": "//a[@class='btn__pager__next--all']",
+        "css": "a.btn__pager__next--all"
+      }
+    },
+    "required": [
+      "start",
+      "previous",
+      "current",
+      "pages",
+      "next",
+      "end"
+    ],
+    "additionalProperties": false,
+    "xpath": "//ul[@class='btn__pager']",
+    "css": "ul.btn__pager"
+  }
+}
