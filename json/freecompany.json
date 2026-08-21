@@ -1,4 +1,121 @@
 {
+  "columns": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "member": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "xpath": "/a",
+              "attribute": "href",
+              "css": "a",
+              "type": "string",
+              "pattern": "lodestone\\/character\\/(\\d+)\\/"
+            },
+            "name": {
+              "type": "string",
+              "xpath": "//p[@class='entry__name']",
+              "css": "p.entry__name"
+            },
+            "avatar": {
+              "type": "string",
+              "format": "uri",
+              "xpath": "//div[@class='entry__chara__face']/img",
+              "attribute": "src",
+              "css": "div.entry__chara__face > img"
+            },
+            "worldname": {
+              "xpath": "//p[@class='entry__world']",
+              "css": "p.entry__world",
+              "type": "string",
+              "pattern": "(\\w+) \\[\\w+\\]"
+            },
+            "dcname": {
+              "xpath": "//p[@class='entry__world']",
+              "css": "p.entry__world",
+              "type": "string",
+              "pattern": "\\w+ \\[(\\w+)\\]"
+            },
+            "rank": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "xpath": "//ul[@class='entry__freecompany__info']/li[1]/span",
+                  "css": "ul.entry__freecompany__info > li:first-of-type > span"
+                },
+                "icon": {
+                  "type": "string",
+                  "format": "uri",
+                  "xpath": "//ul[@class='entry__freecompany__info']/li[1]/img",
+                  "attribute": "src",
+                  "css": "ul.entry__freecompany__info > li:first-of-type > img"
+                }
+              },
+              "required": [
+                "name",
+                "icon"
+              ]
+            },
+            "grandcompany": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "xpath": "//li[@class='js__tooltip']",
+                  "attribute": "data-tooltip",
+                  "css": "li.js__tooltip",
+                  "type": "string",
+                  "pattern": "(\\w+) \\/ \\w+"
+                },
+                "rank": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "xpath": "//li[@class='js__tooltip']",
+                      "attribute": "data-tooltip",
+                      "css": "li.js__tooltip",
+                      "type": "string",
+                      "pattern": "\\w+ \\/ (\\w+)"
+                    },
+                    "icon": {
+                      "type": "string",
+                      "format": "uri",
+                      "xpath": "//li[@class='js__tooltip']/img",
+                      "attribute": "src",
+                      "css": "li.js__tooltip > img"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "icon"
+                  ]
+                }
+              },
+              "required": [
+                "name",
+                "rank"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "name",
+            "avatar",
+            "worldname",
+            "dcname"
+          ]
+        },
+        "xpath": "//div[@class='ldst__window']//li[@class='entry']",
+        "css": "div.ldst__window li.entry"
+      }
+    },
+    "required": [
+      "member"
+    ]
+  },
   "entries": {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "type": "array",
@@ -6,11 +123,11 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "string",
           "xpath": "/a",
           "attribute": "href",
-          "regex": "lodestone\\/freecompany\\/(\\S+)\\/",
-          "css": "a"
+          "css": "a",
+          "type": "string",
+          "pattern": "lodestone\\/freecompany\\/(\\d+)\\/"
         },
         "name": {
           "type": "string",
@@ -18,16 +135,16 @@
           "css": "p.entry__name"
         },
         "worldname": {
-          "type": "string",
           "xpath": "//p[@class='entry__world'][2]",
-          "regex": "(\\w+) \\[\\w+\\]",
-          "css": "p.entry__world:nth-of-type(2)"
+          "css": "p.entry__world:nth-of-type(2)",
+          "type": "string",
+          "pattern": "(\\w+) \\[\\w+\\]"
         },
         "dcname": {
-          "type": "string",
           "xpath": "//p[@class='entry__world'][2]",
-          "regex": "\\w+ \\[(\\w+)\\]",
-          "css": "p.entry__world:nth-of-type(2)"
+          "css": "p.entry__world:nth-of-type(2)",
+          "type": "string",
+          "pattern": "\\w+ \\[(\\w+)\\]"
         },
         "crest": {
           "type": "array",
@@ -55,20 +172,20 @@
           "css": "li.entry__freecompany__fc-housing"
         },
         "formed": {
-          "type": "string",
           "xpath": "//li[@class='entry__freecompany__fc-day']/script",
-          "regex": "ldst_strftime\\((\\d+)",
-          "css": "li.entry__freecompany__fc-day > script"
+          "css": "li.entry__freecompany__fc-day > script",
+          "type": "string",
+          "pattern": "ldst_strftime\\((\\d+)"
         },
         "active": {
-          "type": "boolean",
           "xpath": "//ul[contains(@class, 'entry__freecompany__fc-data')]/li[4]",
-          "css": "ul[class*=\"entry__freecompany__fc-data\"] > li:nth-of-type(4)"
+          "css": "ul[class*=\"entry__freecompany__fc-data\"] > li:nth-of-type(4)",
+          "type": "string"
         },
         "recuiting": {
-          "type": "boolean",
           "xpath": "//ul[contains(@class, 'entry__freecompany__fc-data')]/li[5]",
-          "css": "ul[class*=\"entry__freecompany__fc-data\"] > li:nth-of-type(5)"
+          "css": "ul[class*=\"entry__freecompany__fc-data\"] > li:nth-of-type(5)",
+          "type": "string"
         }
       },
       "required": [
@@ -83,8 +200,7 @@
         "formed",
         "active",
         "recuiting"
-      ],
-      "additionalProperties": false
+      ]
     },
     "xpath": "//div[@class='ldst__window']//div[@class='entry']",
     "css": "div.ldst__window div.entry"
@@ -99,38 +215,37 @@
         "css": "p.entry__freecompany__name"
       },
       "worldname": {
-        "type": "string",
         "xpath": "//p[@class='entry__freecompany__gc'][2]",
-        "regex": "(\\w+) \\[\\w+\\]",
-        "css": "p.entry__freecompany__gc:nth-of-type(2)"
+        "css": "p.entry__freecompany__gc:nth-of-type(2)",
+        "type": "string",
+        "pattern": "(\\w+) \\[\\w+\\]"
       },
       "dcname": {
-        "type": "string",
         "xpath": "//p[@class='entry__freecompany__gc'][2]",
-        "regex": "\\w+ \\[(\\w+)\\]",
-        "css": "p.entry__freecompany__gc:nth-of-type(2)"
+        "css": "p.entry__freecompany__gc:nth-of-type(2)",
+        "type": "string",
+        "pattern": "\\w+ \\[(\\w+)\\]"
       },
       "grandcompany": {
         "type": "object",
         "properties": {
           "name": {
-            "type": "string",
             "xpath": "//p[@class='entry__freecompany__gc']",
-            "regex": "(\\w+) <\\w+>",
-            "css": "p.entry__freecompany__gc"
+            "css": "p.entry__freecompany__gc",
+            "type": "string",
+            "pattern": "(\\w+) <\\w+>"
           },
           "rank": {
-            "type": "string",
             "xpath": "//p[@class='entry__freecompany__gc']",
-            "regex": "\\w+ <(\\w+)>",
-            "css": "p.entry__freecompany__gc"
+            "css": "p.entry__freecompany__gc",
+            "type": "string",
+            "pattern": "\\w+ <(\\w+)>"
           }
         },
         "required": [
           "name",
           "rank"
-        ],
-        "additionalProperties": false
+        ]
       },
       "tag": {
         "type": "string",
@@ -143,12 +258,10 @@
         "css": "p.freecompany__text.freecompany__text__message"
       },
       "formed": {
-        "type": "string",
-        "format": "date",
-        "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
         "xpath": "//p[@class='freecompany__text']/script",
-        "regex": "ldst_strftime\\((\\d+)",
-        "css": "p.freecompany__text > script"
+        "css": "p.freecompany__text > script",
+        "type": "string",
+        "pattern": "ldst_strftime\\((\\d+)"
       },
       "members": {
         "type": "number",
@@ -187,8 +300,7 @@
             "name",
             "icon",
             "rank"
-          ],
-          "additionalProperties": false
+          ]
         },
         "xpath": "//div[@class='freecompany__reputation']",
         "css": "div.freecompany__reputation"
@@ -197,23 +309,22 @@
         "type": "object",
         "properties": {
           "weekly": {
-            "type": "number",
             "xpath": "//table[@class='character__ranking__data']//tr[1]/th",
-            "regex": "(\\d+)",
-            "css": "table.character__ranking__data tr:first-of-type > th"
+            "css": "table.character__ranking__data tr:first-of-type > th",
+            "type": "string",
+            "pattern": "(\\d+)"
           },
           "monthly": {
-            "type": "number",
             "xpath": "//table[@class='character__ranking__data']//tr[2]/th",
-            "regex": "(\\d+)",
-            "css": "table.character__ranking__data tr:nth-of-type(2) > th"
+            "css": "table.character__ranking__data tr:nth-of-type(2) > th",
+            "type": "string",
+            "pattern": "(\\d+)"
           }
         },
         "required": [
           "weekly",
           "monthly"
-        ],
-        "additionalProperties": false
+        ]
       },
       "estate": {
         "type": "object",
@@ -238,8 +349,7 @@
           "name",
           "address",
           "greeting"
-        ],
-        "additionalProperties": false
+        ]
       },
       "active": {
         "type": "string",
@@ -247,9 +357,9 @@
         "css": "div.ldst__window:nth-of-type(2) p.freecompany__text"
       },
       "recruiting": {
-        "type": "boolean",
         "xpath": "//p[@class='freecompany__recruitment']",
-        "css": "p.freecompany__recruitment"
+        "css": "p.freecompany__recruitment",
+        "type": "string"
       },
       "focus": {
         "type": "array",
@@ -272,8 +382,7 @@
           "required": [
             "name",
             "icon"
-          ],
-          "additionalProperties": false
+          ]
         },
         "xpath": "//ul[@class='freecompany__focus_icon'][1]/li[not(@class)]",
         "css": "ul.freecompany__focus_icon:first-of-type > li:not([class])"
@@ -299,8 +408,7 @@
           "required": [
             "name",
             "icon"
-          ],
-          "additionalProperties": false
+          ]
         },
         "xpath": "//ul[@class='freecompany__focus_icon'][2]/li[not(@class)]",
         "css": "ul.freecompany__focus_icon:nth-of-type(2) > li:not([class])"
@@ -322,8 +430,7 @@
       "recruiting",
       "focus",
       "seeking"
-    ],
-    "additionalProperties": false
+    ]
   },
   "query": {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -450,7 +557,6 @@
     },
     "required": [
       "q"
-    ],
-    "additionalProperties": false
+    ]
   }
 }

@@ -14,16 +14,16 @@
         "css": "a.btn__pager__prev"
       },
       "current": {
-        "type": "number",
         "xpath": "//a[@class='btn__pager__current']",
-        "regex": "(\\d+)",
-        "css": "a.btn__pager__current"
+        "css": "a.btn__pager__current",
+        "type": "string",
+        "pattern": "(\\d+)"
       },
       "pages": {
-        "type": "number",
         "xpath": "//a[@class='btn__pager__current']",
-        "regex": "(\\d+)",
-        "css": "a.btn__pager__current"
+        "css": "a.btn__pager__current",
+        "type": "string",
+        "pattern": "(\\d+)"
       },
       "next": {
         "type": "string",
@@ -44,7 +44,6 @@
       "next",
       "end"
     ],
-    "additionalProperties": false,
     "xpath": "//ul[@class='btn__pager']",
     "css": "ul.btn__pager"
   }
