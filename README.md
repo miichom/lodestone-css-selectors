@@ -1,34 +1,29 @@
 # Lodestone Selectors
 
-A collection of pre-defined CSS selectors and XPath expressions optimized for extracting Final Fantasy XIV Lodestone data in lightweight, server-side environments.
+A ready-to-use collection of CSS selectors, XPath expressions, and Zod schemas for scraping data from the Final Fantasy XIV Lodestone. Designed for fast, lightweight parsing across any programming language.
 
-## What This Project Does
+## Quick Start
 
-This repository provides a ready-to-use map of target paths for scraping character, free company, and event data from the FFXIV Lodestone. Instead of manually inspecting HTML structures and writing parsers from scratch, developers can import these pre-built, typed definitions directly into their projects.
+If you are incorporating these selectors into another project, you can add this repository using Git submodules. This allows you to track updates without manually copying files.
 
-## Lineage & Architecture
+```sh
+git submodule add https://github.com/miichom/lodestone-selectors.git <path>
+```
 
-Following the merge of [`miichom/lodestone`](https://github.com/miichom/lodestone) (now integrated into [`xivapi/nodestone`](https://github.com/xivapi/nodestone) via [#20](https://github.com/xivapi/nodestone/issues/20)), this repository inherits a core design philosophy built specifically around **XPath** queries and **Zod** validation. While CSS selectors were added for broader utility, XPath and Zod remain foundational to how the schemas are structured and verified as the single source of truth.
+For more details on managing submodules, check out the [Official Git Submodules Documentation](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
 
-## Core Concepts
+## Key Features
 
-### Why Use CSS Selectors & XPath?
+- **XPath & CSS Selectors:** Choose standard CSS selectors for fast direct matching, or XPath for complex text matching and parent-node traversal.
+- **Zod & JSON Schemas:** Written in Zod for TypeScript type safety, and automatically compiled to standard JSON for non-TypeScript environments (Python, Go, Rust, etc.).
+- **Lightweight & DOMless:** Optimized for fast HTML parsers like Cheerio or Happy DOM without needing a full browser.
 
-To pull specific information from a web page &ndash; such as a character's level, job, or equipment &ndash; your code needs a precise way to locate elements within the HTML:
+## Project Lineage
 
-- **XPath Queries:** The original foundation of the project. Advanced search expressions capable of complex logic that CSS cannot handle, such as finding elements by exact text content or navigating upward through parent nodes.
-- **CSS Selectors:** Fast, clean, and ideal for standard, direct element targeting (e.g., matching a class like `.character__name`).
-
-_Providing both gives developers the flexibility to choose the best strategy for their specific parsing tools._
-
-### Why Zod Outputs to JSON
-
-[Zod](https://zod.dev/) serves as the single source of truth for runtime validation and static inference, automatically compiling into standard JSON schemas:
-
-- **Language-Agnostic:** Standard JSON allows non-TypeScript environments (Python, Rust, Go, Ruby) to easily consume the selectors.
-- **DOMless Efficiency:** Lightweight HTML parsers (like Cheerio or Happy DOM) can read raw JSON configurations instantly without the overhead of a full browser engine.
-- **Automated Sync:** Schema compilation guarantees that TypeScript definitions and raw JSON exports remain strictly aligned without manual upkeep.
+This repository inherits its design from [miichom/lodestone](https://github.com/miichom/lodestone) (now merged into [xivapi/nodestone](https://github.com/xivapi/nodestone)).
 
 ## Contributing
 
-Contributions are welcome! If you want to update or add new selectors, simply submit a Pull Request with your changes to the TypeScript/Zod source schemas. You do not need to manually edit or recompile the output files &ndash; our CI pipeline will automatically generate and commit the updated JSON files upon merge.
+Contributions are welcome! If you want to update or add new selectors, simply submit a Pull Request with your changes to the TypeScript/Zod source schemas.
+
+> **Note:** You don't need to manually recompile the JSON output. The CI pipeline generates and commits the updated JSON files automatically when merged.
