@@ -1,6 +1,3 @@
-import { z } from "zod";
-import { selector } from "../utils.ts";
-
 export enum Region {
   Japan = "_region_1",
   NorthAmerica = "_region_2",
@@ -105,32 +102,3 @@ export enum Tribe {
   Rava = "tribe_15",
   Veena = "tribe_16",
 }
-
-export const pagination = z
-  .object({
-    start: z
-      .string()
-      .meta(selector({ xpath: "//a[@class='btn__pager__prev--all']" })),
-    previous: z
-      .string()
-      .meta(selector({ xpath: "//a[@class='btn__pager__prev']" })),
-    current: z.number().meta(
-      selector({
-        xpath: "//a[@class='btn__pager__current']",
-        regex: /(\d+)/g,
-      })
-    ),
-    pages: z.number().meta(
-      selector({
-        xpath: "//a[@class='btn__pager__current']",
-        regex: /(\d+)/g,
-      })
-    ),
-    next: z
-      .string()
-      .meta(selector({ xpath: "//a[@class='btn__pager__next']" })),
-    end: z
-      .string()
-      .meta(selector({ xpath: "//a[@class='btn__pager__next--all']" })),
-  })
-  .meta(selector({ xpath: "//ul[@class='btn__pager']" }));

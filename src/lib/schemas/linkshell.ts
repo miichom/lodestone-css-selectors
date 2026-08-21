@@ -1,0 +1,182 @@
+import { z } from "zod";
+import { Datacenter, Region } from "../models.ts";
+import { resolveSchema } from "../utils.ts";
+
+// /lodestone/linkshell/{id}
+export const profile = resolveSchema(
+  z.object({
+    name: z.string().meta({ xpath: "//h3[@class='heading__linkshell__name']" }),
+    icon: z.url().meta({
+      xpath: "//div[@class='heading__linkshell__icon']/img",
+      attribute: "src",
+    }),
+    members: z
+      .array(
+        z.object({
+          id: z
+            .string()
+            .regex(/lodestone\/character\/(\d+)\//)
+            .transform(
+              (val) =>
+                val.match(/lodestone\/character\/(\d+)\//)?.[1].trim() ??
+                val.trim()
+            )
+            .meta({
+              xpath: "/a[@class='entry__link']",
+              attribute: "href",
+            }),
+          name: z.string().meta({ xpath: "//p[@class='entry__name']" }),
+          avatar: z.url().meta({
+            xpath: "//div[@class='entry__chara__face']/img",
+            attribute: "src",
+          }),
+          worldname: z
+            .string()
+            .regex(/(\w+) \[\w+\]/)
+            .transform(
+              (val) => val.match(/(\w+) \[\w+\]/)?.[1].trim() ?? val.trim()
+            )
+            .meta({
+              xpath: "//p[@class='entry__world']",
+            }),
+          dcname: z
+            .string()
+            .regex(/\w+ \[(\w+)\]/)
+            .transform(
+              (val) => val.match(/\w+ \[(\w+)\]/)?.[1].trim() ?? val.trim()
+            )
+            .meta({
+              xpath: "//p[@class='entry__world']",
+            }),
+          rank: z
+            .object({
+              name: z.string().meta({
+                xpath: "//div[@class='entry__chara_info__linkshell']/span",
+              }),
+              icon: z.url().meta({
+                xpath: "//div[@class='entry__chara_info__linkshell']/img",
+                attribute: "src",
+              }),
+            })
+            .optional(),
+          grandcompany: z
+            .object({
+              name: z
+                .string()
+                .regex(/(\w+) \/ \w+/)
+                .transform(
+                  (val) => val.match(/(\w+) \/ \w+/)?.[1].trim() ?? val.trim()
+                )
+                .meta({
+                  xpath: "//li[@class='js__tooltip']",
+                  attribute: "data-tooltip",
+                }),
+              rank: z.object({
+                name: z
+                  .string()
+                  .regex(/\w+ \/ (\w+)/)
+                  .transform(
+                    (val) => val.match(/\w+ \/ (\w+)/)?.[1].trim() ?? val.trim()
+                  )
+                  .meta({
+                    xpath: "//li[@class='js__tooltip']",
+                    attribute: "data-tooltip",
+                  }),
+                icon: z.url().meta({
+                  xpath: "//li[@class='js__tooltip']/img",
+                  attribute: "src",
+                }),
+              }),
+            })
+            .optional(),
+          freecompany: z
+            .object({
+              id: z
+                .string()
+                .regex(/lodestone\/freecompany\/(\d+)\//)
+                .transform(
+                  (val) =>
+                    val.match(/lodestone\/freecompany\/(\d+)\//)?.[1].trim() ??
+                    val.trim()
+                )
+                .meta({
+                  xpath: "/a[@class='entry__freecompany__link']",
+                  attribute: "href",
+                }),
+              name: z.string().meta({
+                xpath: "/a[@class='entry__freecompany__link']/span",
+              }),
+              crest: z.array(z.url()).meta({
+                xpath: "/a[@class='entry__freecompany__link']//img",
+                attribute: "src",
+              }),
+            })
+            .optional(),
+        })
+      )
+      .meta({
+        xpath: "//div[@class='ls__member']/div[@class='entry']",
+      }),
+  })
+);
+
+export const query = z.object({
+  q: z.string(),
+  cf_public: z.boolean().optional(),
+  worldname: z
+    .union([
+      z.enum(Region),
+      z.enum(Datacenter),
+      z.string().regex(/^[A-Za-z]+$/),
+    ])
+    .optional(),
+  character_count: z.enum(["1-10", "11-30", "31-50", "51-"]).optional(),
+  order: z.number().min(1).max(6).optional(),
+  page: z.number().min(1).max(20).optional(),
+});
+
+// /lodestone/linkshell?q=...
+export const entries = resolveSchema(
+  z
+    .array(
+      z.object({
+        id: z
+          .string()
+          .regex(/lodestone\/linkshell\/(\d+)\//)
+          .transform(
+            (val) =>
+              val.match(/lodestone\/linkshell\/(\d+)\//)?.[1].trim() ??
+              val.trim()
+          )
+          .meta({
+            xpath: "/a",
+            attribute: "href",
+          }),
+        name: z.string().meta({ xpath: "//p[@class='entry__name']" }),
+        worldname: z
+          .string()
+          .regex(/(\w+) \[\w+\]/)
+          .transform(
+            (val) => val.match(/(\w+) \[\w+\]/)?.[1].trim() ?? val.trim()
+          )
+          .meta({
+            xpath: "//p[@class='entry__world']",
+          }),
+        dcname: z
+          .string()
+          .regex(/\w+ \[(\w+)\]/)
+          .transform(
+            (val) => val.match(/\w+ \[(\w+)\]/)?.[1].trim() ?? val.trim()
+          )
+          .meta({
+            xpath: "//p[@class='entry__world']",
+          }),
+        members: z.coerce.number().meta({
+          xpath: "//div[@class='entry__linkshell__member']//span",
+        }),
+      })
+    )
+    .meta({
+      xpath: "//div[@class='ldst__window']//div[@class='entry']",
+    })
+);
