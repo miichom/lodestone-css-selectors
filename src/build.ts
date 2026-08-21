@@ -4,7 +4,7 @@ import consola from "consola";
 import pc from "picocolors";
 import { isCI } from "std-env";
 import { z } from "zod/v4";
-import * as schemas from "./lib/index.ts";
+import * as schemas from "./index.ts";
 
 async function build() {
   const dir = path.resolve(process.cwd(), "json");
