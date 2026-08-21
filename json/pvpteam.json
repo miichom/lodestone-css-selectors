@@ -6,11 +6,11 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "string",
           "xpath": "/a",
           "attribute": "href",
-          "regex": "lodestone\\/pvpteam\\/(\\S+)\\/",
-          "css": "a"
+          "css": "a",
+          "type": "string",
+          "pattern": "lodestone\\/pvpteam\\/(\\S+)\\/"
         },
         "name": {
           "type": "string",
@@ -38,8 +38,7 @@
         "name",
         "dcname",
         "crest"
-      ],
-      "additionalProperties": false
+      ]
     },
     "xpath": "//div[@class='ldst__window']//div[@class='entry']",
     "css": "div.ldst__window div.entry"
@@ -50,13 +49,11 @@
     "properties": {
       "name": {
         "type": "string",
-        "xpath": "//h2[@class='entry__pvpteam__name--team']",
-        "css": "h2.entry__pvpteam__name--team"
+        "xpath": "//h2[@class='entry__pvpteam__name--team']"
       },
       "dcname": {
         "type": "string",
-        "xpath": "//p[@class='entry__pvpteam__name--dc']",
-        "css": "p.entry__pvpteam__name--dc"
+        "xpath": "//p[@class='entry__pvpteam__name--dc']"
       },
       "crest": {
         "type": "array",
@@ -65,8 +62,7 @@
           "format": "uri"
         },
         "xpath": "//div[@class='entry__pvpteam__crest__image']/img",
-        "attribute": "src",
-        "css": "div.entry__pvpteam__crest__image > img"
+        "attribute": "src"
       },
       "members": {
         "type": "array",
@@ -76,99 +72,85 @@
             "id": {
               "type": "string",
               "xpath": "/a[@class='entry__bg']",
-              "attribute": "href",
-              "css": "a.entry__bg"
+              "attribute": "href"
             },
             "name": {
               "type": "string",
-              "xpath": "//p[@class='entry__name']",
-              "css": "p.entry__name"
+              "xpath": "//p[@class='entry__name']"
             },
             "avatar": {
               "type": "string",
               "format": "uri",
               "xpath": "//div[@class='entry__chara__face']/img",
-              "attribute": "src",
-              "css": "div.entry__chara__face > img"
+              "attribute": "src"
             },
             "worldname": {
-              "type": "string",
               "xpath": "//p[@class='entry__world']",
-              "regex": "lodestone\\/character\\/(\\S+)\\/",
-              "css": "p.entry__world"
+              "type": "string",
+              "pattern": "(\\w+) \\[\\w+\\]"
             },
             "dcname": {
-              "type": "string",
               "xpath": "//p[@class='entry__world']",
-              "regex": "\\w+ \\[(\\w+)\\]",
-              "css": "p.entry__world"
+              "type": "string",
+              "pattern": "\\w+ \\[(\\w+)\\]"
             },
             "rank": {
               "type": "object",
               "properties": {
                 "name": {
                   "type": "string",
-                  "xpath": "//ul[contains(@class, 'info')]/li/img[not(@class)]/following-sibling::span",
-                  "css": "ul[class*=\"info\"] > li > img:not([class]) + span"
+                  "xpath": "//ul[contains(@class, 'info')]/li/img[not(@class)]/following-sibling::span"
                 },
                 "icon": {
                   "type": "string",
                   "format": "uri",
                   "xpath": "//ul[contains(@class, 'info')]/li[span]/img[not(@class)]",
-                  "attribute": "src",
-                  "css": "ul[class*=\"info\"] > li:has(> span) > img:not([class])"
+                  "attribute": "src"
                 }
               },
               "required": [
                 "name",
                 "icon"
-              ],
-              "additionalProperties": false
+              ]
             },
             "grandcompany": {
               "type": "object",
               "properties": {
                 "name": {
-                  "type": "string",
                   "xpath": "//li[@class='js__tooltip']",
                   "attribute": "data-tooltip",
-                  "regex": "(\\D+) \\/ \\D+",
-                  "css": "li.js__tooltip"
+                  "type": "string",
+                  "pattern": "(\\w+) \\/ \\w+"
                 },
                 "rank": {
                   "type": "object",
                   "properties": {
                     "name": {
-                      "type": "string",
                       "xpath": "//li[@class='js__tooltip']",
                       "attribute": "data-tooltip",
-                      "regex": "\\D+ \\/ (\\D+)",
-                      "css": "li.js__tooltip"
+                      "type": "string",
+                      "pattern": "\\w+ \\/ (\\w+)"
                     },
                     "icon": {
                       "type": "string",
                       "format": "uri",
                       "xpath": "//li[@class='js__tooltip']/img",
-                      "attribute": "src",
-                      "css": "li.js__tooltip > img"
+                      "attribute": "src"
                     }
                   },
                   "required": [
                     "name",
                     "icon"
-                  ],
-                  "additionalProperties": false
+                  ]
                 }
               },
               "required": [
                 "name",
                 "rank"
-              ],
-              "additionalProperties": false
+              ]
             },
             "matches": {
               "xpath": "//ul[contains(@class, '__info')]/li/img[contains(@class, 'entry__pvpteam__battle__icon')]/following-sibling::span",
-              "css": "ul[class*=\"__info\"] > li > img[class*=\"entry__pvpteam__battle__icon\"] + span",
               "type": "number"
             }
           },
@@ -178,15 +160,13 @@
             "avatar",
             "worldname",
             "dcname"
-          ],
-          "additionalProperties": false
+          ]
         },
-        "xpath": "//div[@class='pvpteam__member']/div[@class='entry']",
-        "css": "div.pvpteam__member > div.entry"
+        "xpath": "//div[@class='pvpteam__member']/div[@class='entry']"
       },
       "formed": {
         "xpath": "//span[@class='entry__pvpteam__data--formed']/span",
-        "css": "span.entry__pvpteam__data--formed > span"
+        "type": "string"
       }
     },
     "required": [
@@ -195,8 +175,7 @@
       "crest",
       "members",
       "formed"
-    ],
-    "additionalProperties": false
+    ]
   },
   "query": {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -253,7 +232,6 @@
     },
     "required": [
       "q"
-    ],
-    "additionalProperties": false
+    ]
   }
 }

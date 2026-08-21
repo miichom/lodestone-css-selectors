@@ -6,11 +6,11 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "string",
           "xpath": "/a",
           "attribute": "href",
-          "regex": "lodestone\\/linkshell\\/(\\S+)\\/",
-          "css": "a"
+          "css": "a",
+          "type": "string",
+          "pattern": "lodestone\\/linkshell\\/(\\d+)\\/"
         },
         "name": {
           "type": "string",
@@ -18,16 +18,16 @@
           "css": "p.entry__name"
         },
         "worldname": {
-          "type": "string",
           "xpath": "//p[@class='entry__world']",
-          "regex": "(\\w+) \\[\\w+\\]",
-          "css": "p.entry__world"
+          "css": "p.entry__world",
+          "type": "string",
+          "pattern": "(\\w+) \\[\\w+\\]"
         },
         "dcname": {
-          "type": "string",
           "xpath": "//p[@class='entry__world']",
-          "regex": "\\w+ \\[(\\w+)\\]",
-          "css": "p.entry__world"
+          "css": "p.entry__world",
+          "type": "string",
+          "pattern": "\\w+ \\[(\\w+)\\]"
         },
         "members": {
           "type": "number",
@@ -41,8 +41,7 @@
         "worldname",
         "dcname",
         "members"
-      ],
-      "additionalProperties": false
+      ]
     },
     "xpath": "//div[@class='ldst__window']//div[@class='entry']",
     "css": "div.ldst__window div.entry"
@@ -69,11 +68,11 @@
           "type": "object",
           "properties": {
             "id": {
-              "type": "string",
               "xpath": "/a[@class='entry__link']",
               "attribute": "href",
-              "regex": "lodestone\\/character\\/(\\S+)\\/",
-              "css": "a.entry__link"
+              "css": "a.entry__link",
+              "type": "string",
+              "pattern": "lodestone\\/character\\/(\\d+)\\/"
             },
             "name": {
               "type": "string",
@@ -88,16 +87,16 @@
               "css": "div.entry__chara__face > img"
             },
             "worldname": {
-              "type": "string",
               "xpath": "//p[@class='entry__world']",
-              "regex": "(\\w+) \\[\\w+\\]",
-              "css": "p.entry__world"
+              "css": "p.entry__world",
+              "type": "string",
+              "pattern": "(\\w+) \\[\\w+\\]"
             },
             "dcname": {
-              "type": "string",
               "xpath": "//p[@class='entry__world']",
-              "regex": "\\w+ \\[(\\w+)\\]",
-              "css": "p.entry__world"
+              "css": "p.entry__world",
+              "type": "string",
+              "pattern": "\\w+ \\[(\\w+)\\]"
             },
             "rank": {
               "type": "object",
@@ -118,28 +117,27 @@
               "required": [
                 "name",
                 "icon"
-              ],
-              "additionalProperties": false
+              ]
             },
             "grandcompany": {
               "type": "object",
               "properties": {
                 "name": {
-                  "type": "string",
                   "xpath": "//li[@class='js__tooltip']",
                   "attribute": "data-tooltip",
-                  "regex": "(\\D+) \\/ \\D+",
-                  "css": "li.js__tooltip"
+                  "css": "li.js__tooltip",
+                  "type": "string",
+                  "pattern": "(\\w+) \\/ \\w+"
                 },
                 "rank": {
                   "type": "object",
                   "properties": {
                     "name": {
-                      "type": "string",
                       "xpath": "//li[@class='js__tooltip']",
                       "attribute": "data-tooltip",
-                      "regex": "\\D+ \\/ (\\D+)",
-                      "css": "li.js__tooltip"
+                      "css": "li.js__tooltip",
+                      "type": "string",
+                      "pattern": "\\w+ \\/ (\\w+)"
                     },
                     "icon": {
                       "type": "string",
@@ -152,25 +150,23 @@
                   "required": [
                     "name",
                     "icon"
-                  ],
-                  "additionalProperties": false
+                  ]
                 }
               },
               "required": [
                 "name",
                 "rank"
-              ],
-              "additionalProperties": false
+              ]
             },
             "freecompany": {
               "type": "object",
               "properties": {
                 "id": {
-                  "type": "string",
                   "xpath": "/a[@class='entry__freecompany__link']",
                   "attribute": "href",
-                  "regex": "lodestone\\/freecompany\\/(\\S+)\\/",
-                  "css": "a.entry__freecompany__link"
+                  "css": "a.entry__freecompany__link",
+                  "type": "string",
+                  "pattern": "lodestone\\/freecompany\\/(\\d+)\\/"
                 },
                 "name": {
                   "type": "string",
@@ -192,8 +188,7 @@
                 "id",
                 "name",
                 "crest"
-              ],
-              "additionalProperties": false
+              ]
             }
           },
           "required": [
@@ -202,8 +197,7 @@
             "avatar",
             "worldname",
             "dcname"
-          ],
-          "additionalProperties": false
+          ]
         },
         "xpath": "//div[@class='ls__member']/div[@class='entry']",
         "css": "div.ls__member > div.entry"
@@ -213,8 +207,7 @@
       "name",
       "icon",
       "members"
-    ],
-    "additionalProperties": false
+    ]
   },
   "query": {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -281,7 +274,6 @@
     },
     "required": [
       "q"
-    ],
-    "additionalProperties": false
+    ]
   }
 }
