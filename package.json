@@ -4,10 +4,10 @@
   "private": true,
   "type": "module",
   "exports": {
-    "./ts/*": "./ts/*.ts",
+    "./ts/*": "./src/schemas/*.ts",
     "./json/*": "./json/*.json"
   },
-  "main": "./ts/index.ts",
+  "main": "./src/index.ts",
   "scripts": {
     "build": "tsx src/build.ts",
     "format": "biome format --write",
