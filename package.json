@@ -5,8 +5,12 @@
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
-    "./ts/*": "./src/schemas/*.ts",
-    "./json/*": "./json/*.json"
+    "./character.json": "./json/character.json",
+    "./cwls.json": "./json/cwls.json",
+    "./freecompany.json": "./json/freecompany.json",
+    "./linkshell.json": "./json/linkshell.json",
+    "./metadata.json": "./json/metadata.json",
+    "./pvpteam.json": "./json/pvpteam.json"
   },
   "main": "./src/index.ts",
   "scripts": {
