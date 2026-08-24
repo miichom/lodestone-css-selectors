@@ -12,3 +12,6 @@ license = "MIT"
 
 [tool.hatch.build.targets.sdist]
 include = ["json/*.json"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["json"]
