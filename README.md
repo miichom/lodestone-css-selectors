@@ -7,7 +7,7 @@ A ready-to-use collection of CSS selectors, XPath expressions, and Zod schemas f
 If you are incorporating these selectors into another project, you can add this repository using Git submodules. This allows you to track updates without manually copying files.
 
 ```sh
-git submodule add https://github.com/miichom/lodestone-selectors.git <path>
+git submodule add https://github.com/miichom/lodestone-css-selectors.git <path>
 ```
 
 For more details on managing submodules, check out the [Official Git Submodules Documentation](https://git-scm.com/book/en/v2/Git-Tools-Submodules).

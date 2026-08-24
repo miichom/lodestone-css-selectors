@@ -1,0 +1,7 @@
+[project]
+name = "lodestone-css-selectors"
+version = "0.1.0"
+description = "A collection of Lodestone CSS selectors and XPath expressions"
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
