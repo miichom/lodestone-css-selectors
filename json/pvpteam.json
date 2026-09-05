@@ -8,19 +8,19 @@
         "id": {
           "xpath": "/a",
           "attribute": "href",
-          "css": "a",
+          "selector": "a",
           "type": "string",
           "pattern": "lodestone\\/pvpteam\\/(\\S+)\\/"
         },
         "name": {
           "type": "string",
           "xpath": "//p[@class='entry__name']",
-          "css": "p.entry__name"
+          "selector": "p.entry__name"
         },
         "dcname": {
           "type": "string",
           "xpath": "//p[@class='entry__world']",
-          "css": "p.entry__world"
+          "selector": "p.entry__world"
         },
         "crest": {
           "type": "array",
@@ -30,7 +30,7 @@
           },
           "xpath": "//div[@class='entry__pvpteam__search__crest__image']/img",
           "attribute": "src",
-          "css": "div.entry__pvpteam__search__crest__image > img"
+          "selector": "div.entry__pvpteam__search__crest__image > img"
         }
       },
       "required": [
@@ -41,7 +41,7 @@
       ]
     },
     "xpath": "//div[@class='ldst__window']//div[@class='entry']",
-    "css": "div.ldst__window div.entry"
+    "selector": "div.ldst__window div.entry"
   },
   "profile": {
     "$schema": "https://json-schema.org/draft/2020-12/schema",

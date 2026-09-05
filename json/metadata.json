@@ -6,34 +6,34 @@
       "start": {
         "type": "string",
         "xpath": "//a[@class='btn__pager__prev--all']",
-        "css": "a.btn__pager__prev--all"
+        "selector": "a.btn__pager__prev--all"
       },
       "previous": {
         "type": "string",
         "xpath": "//a[@class='btn__pager__prev']",
-        "css": "a.btn__pager__prev"
+        "selector": "a.btn__pager__prev"
       },
       "current": {
         "xpath": "//a[@class='btn__pager__current']",
-        "css": "a.btn__pager__current",
+        "selector": "a.btn__pager__current",
         "type": "string",
         "pattern": "(\\d+)"
       },
       "pages": {
         "xpath": "//a[@class='btn__pager__current']",
-        "css": "a.btn__pager__current",
+        "selector": "a.btn__pager__current",
         "type": "string",
         "pattern": "(\\d+)"
       },
       "next": {
         "type": "string",
         "xpath": "//a[@class='btn__pager__next']",
-        "css": "a.btn__pager__next"
+        "selector": "a.btn__pager__next"
       },
       "end": {
         "type": "string",
         "xpath": "//a[@class='btn__pager__next--all']",
-        "css": "a.btn__pager__next--all"
+        "selector": "a.btn__pager__next--all"
       }
     },
     "required": [
@@ -45,6 +45,6 @@
       "end"
     ],
     "xpath": "//ul[@class='btn__pager']",
-    "css": "ul.btn__pager"
+    "selector": "ul.btn__pager"
   }
 }

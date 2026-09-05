@@ -11,31 +11,31 @@
             "id": {
               "xpath": "/a",
               "attribute": "href",
-              "css": "a",
+              "selector": "a",
               "type": "string",
               "pattern": "lodestone\\/character\\/(\\d+)\\/"
             },
             "name": {
               "type": "string",
               "xpath": "//p[@class='entry__name']",
-              "css": "p.entry__name"
+              "selector": "p.entry__name"
             },
             "avatar": {
               "type": "string",
               "format": "uri",
               "xpath": "//div[@class='entry__chara__face']/img",
               "attribute": "src",
-              "css": "div.entry__chara__face > img"
+              "selector": "div.entry__chara__face > img"
             },
             "worldname": {
               "xpath": "//p[@class='entry__world']",
-              "css": "p.entry__world",
+              "selector": "p.entry__world",
               "type": "string",
               "pattern": "(\\w+) \\[\\w+\\]"
             },
             "dcname": {
               "xpath": "//p[@class='entry__world']",
-              "css": "p.entry__world",
+              "selector": "p.entry__world",
               "type": "string",
               "pattern": "\\w+ \\[(\\w+)\\]"
             },
@@ -45,14 +45,14 @@
                 "name": {
                   "type": "string",
                   "xpath": "//ul[@class='entry__freecompany__info']/li[1]/span",
-                  "css": "ul.entry__freecompany__info > li:first-of-type > span"
+                  "selector": "ul.entry__freecompany__info > li:first-of-type > span"
                 },
                 "icon": {
                   "type": "string",
                   "format": "uri",
                   "xpath": "//ul[@class='entry__freecompany__info']/li[1]/img",
                   "attribute": "src",
-                  "css": "ul.entry__freecompany__info > li:first-of-type > img"
+                  "selector": "ul.entry__freecompany__info > li:first-of-type > img"
                 }
               },
               "required": [
@@ -66,7 +66,7 @@
                 "name": {
                   "xpath": "//li[@class='js__tooltip']",
                   "attribute": "data-tooltip",
-                  "css": "li.js__tooltip",
+                  "selector": "li.js__tooltip",
                   "type": "string",
                   "pattern": "(\\w+) \\/ \\w+"
                 },
@@ -76,7 +76,7 @@
                     "name": {
                       "xpath": "//li[@class='js__tooltip']",
                       "attribute": "data-tooltip",
-                      "css": "li.js__tooltip",
+                      "selector": "li.js__tooltip",
                       "type": "string",
                       "pattern": "\\w+ \\/ (\\w+)"
                     },
@@ -85,7 +85,7 @@
                       "format": "uri",
                       "xpath": "//li[@class='js__tooltip']/img",
                       "attribute": "src",
-                      "css": "li.js__tooltip > img"
+                      "selector": "li.js__tooltip > img"
                     }
                   },
                   "required": [
@@ -109,7 +109,7 @@
           ]
         },
         "xpath": "//div[@class='ldst__window']//li[@class='entry']",
-        "css": "div.ldst__window li.entry"
+        "selector": "div.ldst__window li.entry"
       }
     },
     "required": [
@@ -125,24 +125,24 @@
         "id": {
           "xpath": "/a",
           "attribute": "href",
-          "css": "a",
+          "selector": "a",
           "type": "string",
           "pattern": "lodestone\\/freecompany\\/(\\d+)\\/"
         },
         "name": {
           "type": "string",
           "xpath": "//p[@class='entry__name']",
-          "css": "p.entry__name"
+          "selector": "p.entry__name"
         },
         "worldname": {
           "xpath": "//p[@class='entry__world'][2]",
-          "css": "p.entry__world:nth-of-type(2)",
+          "selector": "p.entry__world:nth-of-type(2)",
           "type": "string",
           "pattern": "(\\w+) \\[\\w+\\]"
         },
         "dcname": {
           "xpath": "//p[@class='entry__world'][2]",
-          "css": "p.entry__world:nth-of-type(2)",
+          "selector": "p.entry__world:nth-of-type(2)",
           "type": "string",
           "pattern": "\\w+ \\[(\\w+)\\]"
         },
@@ -154,37 +154,37 @@
           },
           "xpath": "//div[@class='entry__freecompany__crest__image']/img",
           "attribute": "src",
-          "css": "div.entry__freecompany__crest__image > img"
+          "selector": "div.entry__freecompany__crest__image > img"
         },
         "grandcompany": {
           "type": "string",
           "xpath": "//p[@class='entry__world'][1]",
-          "css": "p.entry__world:first-of-type"
+          "selector": "p.entry__world:first-of-type"
         },
         "members": {
           "type": "number",
           "xpath": "//li[@class='entry__freecompany__fc-member']",
-          "css": "li.entry__freecompany__fc-member"
+          "selector": "li.entry__freecompany__fc-member"
         },
         "estate": {
           "type": "string",
           "xpath": "//li[@class='entry__freecompany__fc-housing']",
-          "css": "li.entry__freecompany__fc-housing"
+          "selector": "li.entry__freecompany__fc-housing"
         },
         "formed": {
           "xpath": "//li[@class='entry__freecompany__fc-day']/script",
-          "css": "li.entry__freecompany__fc-day > script",
+          "selector": "li.entry__freecompany__fc-day > script",
           "type": "string",
           "pattern": "ldst_strftime\\((\\d+)"
         },
         "active": {
           "xpath": "//ul[contains(@class, 'entry__freecompany__fc-data')]/li[4]",
-          "css": "ul[class*=\"entry__freecompany__fc-data\"] > li:nth-of-type(4)",
+          "selector": "ul[class*=\"entry__freecompany__fc-data\"] > li:nth-of-type(4)",
           "type": "string"
         },
         "recuiting": {
           "xpath": "//ul[contains(@class, 'entry__freecompany__fc-data')]/li[5]",
-          "css": "ul[class*=\"entry__freecompany__fc-data\"] > li:nth-of-type(5)",
+          "selector": "ul[class*=\"entry__freecompany__fc-data\"] > li:nth-of-type(5)",
           "type": "string"
         }
       },
@@ -203,7 +203,7 @@
       ]
     },
     "xpath": "//div[@class='ldst__window']//div[@class='entry']",
-    "css": "div.ldst__window div.entry"
+    "selector": "div.ldst__window div.entry"
   },
   "profile": {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -212,17 +212,17 @@
       "name": {
         "type": "string",
         "xpath": "//p[@class='entry__freecompany__name']",
-        "css": "p.entry__freecompany__name"
+        "selector": "p.entry__freecompany__name"
       },
       "worldname": {
         "xpath": "//p[@class='entry__freecompany__gc'][2]",
-        "css": "p.entry__freecompany__gc:nth-of-type(2)",
+        "selector": "p.entry__freecompany__gc:nth-of-type(2)",
         "type": "string",
         "pattern": "(\\w+) \\[\\w+\\]"
       },
       "dcname": {
         "xpath": "//p[@class='entry__freecompany__gc'][2]",
-        "css": "p.entry__freecompany__gc:nth-of-type(2)",
+        "selector": "p.entry__freecompany__gc:nth-of-type(2)",
         "type": "string",
         "pattern": "\\w+ \\[(\\w+)\\]"
       },
@@ -231,13 +231,13 @@
         "properties": {
           "name": {
             "xpath": "//p[@class='entry__freecompany__gc']",
-            "css": "p.entry__freecompany__gc",
+            "selector": "p.entry__freecompany__gc",
             "type": "string",
             "pattern": "(\\w+) <\\w+>"
           },
           "rank": {
             "xpath": "//p[@class='entry__freecompany__gc']",
-            "css": "p.entry__freecompany__gc",
+            "selector": "p.entry__freecompany__gc",
             "type": "string",
             "pattern": "\\w+ <(\\w+)>"
           }
@@ -250,28 +250,28 @@
       "tag": {
         "type": "string",
         "xpath": "//p[@class='freecompany__text freecompany__text__tag']",
-        "css": "p.freecompany__text.freecompany__text__tag"
+        "selector": "p.freecompany__text.freecompany__text__tag"
       },
       "slogan": {
         "type": "string",
         "xpath": "//p[@class='freecompany__text freecompany__text__message']",
-        "css": "p.freecompany__text.freecompany__text__message"
+        "selector": "p.freecompany__text.freecompany__text__message"
       },
       "formed": {
         "xpath": "//p[@class='freecompany__text']/script",
-        "css": "p.freecompany__text > script",
+        "selector": "p.freecompany__text > script",
         "type": "string",
         "pattern": "ldst_strftime\\((\\d+)"
       },
       "members": {
         "type": "number",
         "xpath": "//div[@class='ldst__window'][1]/p[6]",
-        "css": "div.ldst__window:first-of-type > p:nth-of-type(6)"
+        "selector": "div.ldst__window:first-of-type > p:nth-of-type(6)"
       },
       "rank": {
         "type": "number",
         "xpath": "//div[@class='ldst__window'][1]/p[7]",
-        "css": "div.ldst__window:first-of-type > p:nth-of-type(7)"
+        "selector": "div.ldst__window:first-of-type > p:nth-of-type(7)"
       },
       "reputation": {
         "type": "array",
@@ -281,19 +281,19 @@
             "name": {
               "type": "string",
               "xpath": "//p[@class='freecompany__reputation__gcname']",
-              "css": "p.freecompany__reputation__gcname"
+              "selector": "p.freecompany__reputation__gcname"
             },
             "icon": {
               "type": "string",
               "format": "uri",
               "xpath": "/div[@class='freecompany__reputation__icon']/img",
               "attribute": "src",
-              "css": "div.freecompany__reputation__icon > img"
+              "selector": "div.freecompany__reputation__icon > img"
             },
             "rank": {
               "type": "string",
               "xpath": "//p[@class='freecompany__reputation__rank']",
-              "css": "p.freecompany__reputation__rank"
+              "selector": "p.freecompany__reputation__rank"
             }
           },
           "required": [
@@ -303,20 +303,20 @@
           ]
         },
         "xpath": "//div[@class='freecompany__reputation']",
-        "css": "div.freecompany__reputation"
+        "selector": "div.freecompany__reputation"
       },
       "rankings": {
         "type": "object",
         "properties": {
           "weekly": {
             "xpath": "//table[@class='character__ranking__data']//tr[1]/th",
-            "css": "table.character__ranking__data tr:first-of-type > th",
+            "selector": "table.character__ranking__data tr:first-of-type > th",
             "type": "string",
             "pattern": "(\\d+)"
           },
           "monthly": {
             "xpath": "//table[@class='character__ranking__data']//tr[2]/th",
-            "css": "table.character__ranking__data tr:nth-of-type(2) > th",
+            "selector": "table.character__ranking__data tr:nth-of-type(2) > th",
             "type": "string",
             "pattern": "(\\d+)"
           }
@@ -332,17 +332,17 @@
           "name": {
             "type": "string",
             "xpath": "//p[@class='freecompany__estate__name']",
-            "css": "p.freecompany__estate__name"
+            "selector": "p.freecompany__estate__name"
           },
           "address": {
             "type": "string",
             "xpath": "//p[@class='freecompany__estate__text']",
-            "css": "p.freecompany__estate__text"
+            "selector": "p.freecompany__estate__text"
           },
           "greeting": {
             "type": "string",
             "xpath": "//p[@class='freecompany__estate__greeting']",
-            "css": "p.freecompany__estate__greeting"
+            "selector": "p.freecompany__estate__greeting"
           }
         },
         "required": [
@@ -354,11 +354,11 @@
       "active": {
         "type": "string",
         "xpath": "//div[@class='ldst__window'][2]//p[@class='freecompany__text']",
-        "css": "div.ldst__window:nth-of-type(2) p.freecompany__text"
+        "selector": "div.ldst__window:nth-of-type(2) p.freecompany__text"
       },
       "recruiting": {
         "xpath": "//p[@class='freecompany__recruitment']",
-        "css": "p.freecompany__recruitment",
+        "selector": "p.freecompany__recruitment",
         "type": "string"
       },
       "focus": {
@@ -369,14 +369,14 @@
             "name": {
               "type": "string",
               "xpath": "//p",
-              "css": "p"
+              "selector": "p"
             },
             "icon": {
               "type": "string",
               "format": "uri",
               "xpath": "//img",
               "attribute": "src",
-              "css": "img"
+              "selector": "img"
             }
           },
           "required": [
@@ -385,7 +385,7 @@
           ]
         },
         "xpath": "//ul[@class='freecompany__focus_icon'][1]/li[not(@class)]",
-        "css": "ul.freecompany__focus_icon:first-of-type > li:not([class])"
+        "selector": "ul.freecompany__focus_icon:first-of-type > li:not([class])"
       },
       "seeking": {
         "type": "array",
@@ -395,14 +395,14 @@
             "name": {
               "type": "string",
               "xpath": "//p",
-              "css": "p"
+              "selector": "p"
             },
             "icon": {
               "type": "string",
               "format": "uri",
               "xpath": "//img",
               "attribute": "src",
-              "css": "img"
+              "selector": "img"
             }
           },
           "required": [
@@ -411,7 +411,7 @@
           ]
         },
         "xpath": "//ul[@class='freecompany__focus_icon'][2]/li[not(@class)]",
-        "css": "ul.freecompany__focus_icon:nth-of-type(2) > li:not([class])"
+        "selector": "ul.freecompany__focus_icon:nth-of-type(2) > li:not([class])"
       }
     },
     "required": [

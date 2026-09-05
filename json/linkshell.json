@@ -8,31 +8,31 @@
         "id": {
           "xpath": "/a",
           "attribute": "href",
-          "css": "a",
+          "selector": "a",
           "type": "string",
           "pattern": "lodestone\\/linkshell\\/(\\d+)\\/"
         },
         "name": {
           "type": "string",
           "xpath": "//p[@class='entry__name']",
-          "css": "p.entry__name"
+          "selector": "p.entry__name"
         },
         "worldname": {
           "xpath": "//p[@class='entry__world']",
-          "css": "p.entry__world",
+          "selector": "p.entry__world",
           "type": "string",
           "pattern": "(\\w+) \\[\\w+\\]"
         },
         "dcname": {
           "xpath": "//p[@class='entry__world']",
-          "css": "p.entry__world",
+          "selector": "p.entry__world",
           "type": "string",
           "pattern": "\\w+ \\[(\\w+)\\]"
         },
         "members": {
           "type": "number",
           "xpath": "//div[@class='entry__linkshell__member']//span",
-          "css": "div.entry__linkshell__member span"
+          "selector": "div.entry__linkshell__member span"
         }
       },
       "required": [
@@ -44,7 +44,7 @@
       ]
     },
     "xpath": "//div[@class='ldst__window']//div[@class='entry']",
-    "css": "div.ldst__window div.entry"
+    "selector": "div.ldst__window div.entry"
   },
   "profile": {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -53,14 +53,14 @@
       "name": {
         "type": "string",
         "xpath": "//h3[@class='heading__linkshell__name']",
-        "css": "h3.heading__linkshell__name"
+        "selector": "h3.heading__linkshell__name"
       },
       "icon": {
         "type": "string",
         "format": "uri",
         "xpath": "//div[@class='heading__linkshell__icon']/img",
         "attribute": "src",
-        "css": "div.heading__linkshell__icon > img"
+        "selector": "div.heading__linkshell__icon > img"
       },
       "members": {
         "type": "array",
@@ -70,31 +70,31 @@
             "id": {
               "xpath": "/a[@class='entry__link']",
               "attribute": "href",
-              "css": "a.entry__link",
+              "selector": "a.entry__link",
               "type": "string",
               "pattern": "lodestone\\/character\\/(\\d+)\\/"
             },
             "name": {
               "type": "string",
               "xpath": "//p[@class='entry__name']",
-              "css": "p.entry__name"
+              "selector": "p.entry__name"
             },
             "avatar": {
               "type": "string",
               "format": "uri",
               "xpath": "//div[@class='entry__chara__face']/img",
               "attribute": "src",
-              "css": "div.entry__chara__face > img"
+              "selector": "div.entry__chara__face > img"
             },
             "worldname": {
               "xpath": "//p[@class='entry__world']",
-              "css": "p.entry__world",
+              "selector": "p.entry__world",
               "type": "string",
               "pattern": "(\\w+) \\[\\w+\\]"
             },
             "dcname": {
               "xpath": "//p[@class='entry__world']",
-              "css": "p.entry__world",
+              "selector": "p.entry__world",
               "type": "string",
               "pattern": "\\w+ \\[(\\w+)\\]"
             },
@@ -104,14 +104,14 @@
                 "name": {
                   "type": "string",
                   "xpath": "//div[@class='entry__chara_info__linkshell']/span",
-                  "css": "div.entry__chara_info__linkshell > span"
+                  "selector": "div.entry__chara_info__linkshell > span"
                 },
                 "icon": {
                   "type": "string",
                   "format": "uri",
                   "xpath": "//div[@class='entry__chara_info__linkshell']/img",
                   "attribute": "src",
-                  "css": "div.entry__chara_info__linkshell > img"
+                  "selector": "div.entry__chara_info__linkshell > img"
                 }
               },
               "required": [
@@ -125,7 +125,7 @@
                 "name": {
                   "xpath": "//li[@class='js__tooltip']",
                   "attribute": "data-tooltip",
-                  "css": "li.js__tooltip",
+                  "selector": "li.js__tooltip",
                   "type": "string",
                   "pattern": "(\\w+) \\/ \\w+"
                 },
@@ -135,7 +135,7 @@
                     "name": {
                       "xpath": "//li[@class='js__tooltip']",
                       "attribute": "data-tooltip",
-                      "css": "li.js__tooltip",
+                      "selector": "li.js__tooltip",
                       "type": "string",
                       "pattern": "\\w+ \\/ (\\w+)"
                     },
@@ -144,7 +144,7 @@
                       "format": "uri",
                       "xpath": "//li[@class='js__tooltip']/img",
                       "attribute": "src",
-                      "css": "li.js__tooltip > img"
+                      "selector": "li.js__tooltip > img"
                     }
                   },
                   "required": [
@@ -164,14 +164,14 @@
                 "id": {
                   "xpath": "/a[@class='entry__freecompany__link']",
                   "attribute": "href",
-                  "css": "a.entry__freecompany__link",
+                  "selector": "a.entry__freecompany__link",
                   "type": "string",
                   "pattern": "lodestone\\/freecompany\\/(\\d+)\\/"
                 },
                 "name": {
                   "type": "string",
                   "xpath": "/a[@class='entry__freecompany__link']/span",
-                  "css": "a.entry__freecompany__link > span"
+                  "selector": "a.entry__freecompany__link > span"
                 },
                 "crest": {
                   "type": "array",
@@ -181,7 +181,7 @@
                   },
                   "xpath": "/a[@class='entry__freecompany__link']//img",
                   "attribute": "src",
-                  "css": "a.entry__freecompany__link img"
+                  "selector": "a.entry__freecompany__link img"
                 }
               },
               "required": [
@@ -200,7 +200,7 @@
           ]
         },
         "xpath": "//div[@class='ls__member']/div[@class='entry']",
-        "css": "div.ls__member > div.entry"
+        "selector": "div.ls__member > div.entry"
       }
     },
     "required": [
