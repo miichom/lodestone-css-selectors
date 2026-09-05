@@ -140,8 +140,9 @@
       "avatar": {
         "type": "string",
         "format": "uri",
-        "xpath": "//div[@class='frame__chara__face']/img/@src",
-        "selector": "div.frame__chara__face[object Object]"
+        "xpath": "//div[@class='frame__chara__face']/img",
+        "attribute": "src",
+        "selector": "div.frame__chara__face > img"
       },
       "worldname": {
         "xpath": "//p[@class='entry__freecompany__gc'][2]",
