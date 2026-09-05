@@ -1,14 +1,14 @@
 import { z } from "zod";
-import { Class, Datacenter, Job, Race, Region, Tribe } from "../models.ts";
-import { resolveSchema } from "../utils.ts";
+import { Class, Datacenter, Job, Race, Region, Tribe } from "../lib/models.ts";
+import { resolveSchema } from "../lib/utils.ts";
 
 // /lodestone/character/{id}
 export const profile = resolveSchema(
   z.object({
-    name: z.string().meta({ xpath: "//p[@class='frame__chara__name']" }),
+    name: z.string().meta({ xpath: "//p[@class='frame__chara__name']/text()" }),
     avatar: z.url().meta({
-      xpath: "//div[@class='frame__chara__face']/img",
-      attribute: "src",
+      xpath: "//div[@class='frame__chara__face']/img/@src",
+      //attribute: "src",
     }),
     worldname: z
       .string()

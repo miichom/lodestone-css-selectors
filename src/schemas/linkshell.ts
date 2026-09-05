@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { Datacenter, Region } from "../models.ts";
-import { resolveSchema } from "../utils.ts";
+import { Datacenter, Region } from "../lib/models.ts";
+import { resolveSchema } from "../lib/utils.ts";
 
 // /lodestone/linkshell/{id}
 export const profile = resolveSchema(

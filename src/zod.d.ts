@@ -1,7 +1,7 @@
 declare module "zod" {
   interface GlobalMeta {
     xpath?: string;
-    css?: string;
+    selector?: string;
     attribute?: string;
   }
 }

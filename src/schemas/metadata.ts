@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { resolveSchema } from "../utils.ts";
+import { resolveSchema } from "../lib/utils.ts";
 
 export const pagination = resolveSchema(
   z

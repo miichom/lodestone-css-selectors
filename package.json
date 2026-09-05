@@ -15,19 +15,19 @@
   },
   "main": "./src/index.ts",
   "scripts": {
-    "build": "tsx src/build.ts",
+    "build": "tsx src/scripts/build.ts",
     "format": "biome format --write",
     "lint": "biome check --write"
   },
   "dependencies": {
-    "@miichom/xpath2css": "^0.1.4",
+    "@miichom/xpath2css": "^0.1.6",
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.5.9",
+    "@biomejs/biome": "^2.5.10",
     "@changesets/cli": "^3.0.1",
     "@tsconfig/node22": "^22.0.6",
-    "@types/node": "^26.2.0",
+    "@types/node": "^26.3.0",
     "consola": "^3.4.2",
     "picocolors": "^1.1.1",
     "std-env": "^4.2.0",

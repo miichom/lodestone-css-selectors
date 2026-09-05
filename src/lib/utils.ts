@@ -1,8 +1,12 @@
-import { xPathToCss } from "@miichom/xpath2css";
+import { fromXPathExpression } from "@miichom/xpath2css";
 import * as z from "zod";
 
-export const resolveMeta = <T extends z.GlobalMeta>(ctx: T) =>
-  Object.assign(ctx, { css: ctx.xpath ? xPathToCss(ctx.xpath) : undefined });
+export const resolveMeta = <T extends z.GlobalMeta>(ctx: T): z.GlobalMeta => {
+  if (!ctx.xpath) return ctx;
+  const css = fromXPathExpression(ctx.xpath);
+  if (typeof css === "string") return Object.assign(ctx, { selector: css });
+  return Object.assign(ctx, css);
+};
 
 export const resolveSchema = <T extends z.ZodType>(schema: T): T => {
   const meta = resolveMeta(schema.meta() ?? {});
