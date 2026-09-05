@@ -7,8 +7,8 @@ export const profile = resolveSchema(
   z.object({
     name: z.string().meta({ xpath: "//p[@class='frame__chara__name']/text()" }),
     avatar: z.url().meta({
-      xpath: "//div[@class='frame__chara__face']/img/@src",
-      //attribute: "src",
+      xpath: "//div[@class='frame__chara__face']/img",
+      attribute: "src",
     }),
     worldname: z
       .string()
