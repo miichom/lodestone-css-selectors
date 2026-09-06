@@ -6,25 +6,25 @@
       "type": "object",
       "properties": {
         "id": {
-          "xpath": "/a",
+          "xpath": "/a[@class='entry__link--line']/@href",
+          "selector": "a.entry__link--line",
           "attribute": "href",
-          "selector": "a",
           "type": "string",
           "pattern": "lodestone\\/crossworld_linkshell\\/(\\S+)\\/"
         },
         "name": {
           "type": "string",
-          "xpath": "//p[@class='entry__name']",
+          "xpath": "//p[@class='entry__name']/text()",
           "selector": "p.entry__name"
         },
         "dcname": {
           "type": "string",
-          "xpath": "//p[@class='entry__world']",
+          "xpath": "//p[@class='entry__world']/text()",
           "selector": "p.entry__world"
         },
         "members": {
           "type": "number",
-          "xpath": "//div[@class='entry__linkshell__member']//span",
+          "xpath": "//div[@class='entry__linkshell__member']//span/text()",
           "selector": "div.entry__linkshell__member span"
         }
       },
@@ -44,20 +44,20 @@
     "properties": {
       "name": {
         "type": "string",
-        "xpath": "//h3[@class='heading__linkshell__name']",
+        "xpath": "//h3[@class='heading__linkshell__name']/text()",
         "selector": "h3.heading__linkshell__name"
       },
       "dcname": {
         "type": "string",
-        "xpath": "//span[@class='heading__cwls__dcname']",
+        "xpath": "//span[@class='heading__cwls__dcname']/text()",
         "selector": "span.heading__cwls__dcname"
       },
       "icon": {
         "type": "string",
         "format": "uri",
-        "xpath": "//div[@class='heading__linkshell__icon']/img",
-        "attribute": "src",
-        "selector": "div.heading__linkshell__icon > img"
+        "xpath": "//div[@class='heading__linkshell__icon']/img/@src",
+        "selector": "div.heading__linkshell__icon > img",
+        "attribute": "src"
       },
       "members": {
         "type": "array",
@@ -65,32 +65,32 @@
           "type": "object",
           "properties": {
             "id": {
-              "xpath": "/a[@class='entry__link']",
-              "attribute": "href",
+              "xpath": "/a[@class='entry__link']/@href",
               "selector": "a.entry__link",
+              "attribute": "href",
               "type": "string",
               "pattern": "lodestone\\/character\\/(\\d+)\\/"
             },
             "name": {
               "type": "string",
-              "xpath": "//p[@class='entry__name']",
+              "xpath": "//p[@class='entry__name']/text()",
               "selector": "p.entry__name"
             },
             "avatar": {
               "type": "string",
               "format": "uri",
-              "xpath": "//div[@class='entry__chara__face']/img",
-              "attribute": "src",
-              "selector": "div.entry__chara__face > img"
+              "xpath": "//div[@class='entry__chara__face']/img/@src",
+              "selector": "div.entry__chara__face > img",
+              "attribute": "src"
             },
             "worldname": {
-              "xpath": "//p[@class='entry__world']",
+              "xpath": "//p[@class='entry__world']/text()",
               "selector": "p.entry__world",
               "type": "string",
               "pattern": "(\\w+) \\[\\w+\\]"
             },
             "dcname": {
-              "xpath": "//p[@class='entry__world']",
+              "xpath": "//p[@class='entry__world']/text()",
               "selector": "p.entry__world",
               "type": "string",
               "pattern": "\\w+ \\[(\\w+)\\]"
@@ -100,15 +100,15 @@
               "properties": {
                 "name": {
                   "type": "string",
-                  "xpath": "//div[@class='entry__chara_info__linkshell']/span",
+                  "xpath": "//div[@class='entry__chara_info__linkshell']/span/text()",
                   "selector": "div.entry__chara_info__linkshell > span"
                 },
                 "icon": {
                   "type": "string",
                   "format": "uri",
-                  "xpath": "//div[@class='entry__chara_info__linkshell']/img",
-                  "attribute": "src",
-                  "selector": "div.entry__chara_info__linkshell > img"
+                  "xpath": "//div[@class='entry__chara_info__linkshell']/img/@src",
+                  "selector": "div.entry__chara_info__linkshell > img",
+                  "attribute": "src"
                 }
               },
               "required": [
@@ -122,9 +122,9 @@
                 "name": {
                   "type": "string",
                   "pattern": "(\\w+) \\/ \\w+",
-                  "xpath": "//li[@class='js__tooltip']",
-                  "attribute": "data-tooltip",
-                  "selector": "li.js__tooltip"
+                  "xpath": "//li[@class='js__tooltip']/@data-tooltip",
+                  "selector": "li.js__tooltip",
+                  "attribute": "data-tooltip"
                 },
                 "rank": {
                   "type": "object",
@@ -132,16 +132,16 @@
                     "name": {
                       "type": "string",
                       "pattern": "\\w+ \\/ (\\w+)",
-                      "xpath": "//li[@class='js__tooltip']",
-                      "attribute": "data-tooltip",
-                      "selector": "li.js__tooltip"
+                      "xpath": "//li[@class='js__tooltip']/@data-tooltip",
+                      "selector": "li.js__tooltip",
+                      "attribute": "data-tooltip"
                     },
                     "icon": {
                       "type": "string",
                       "format": "uri",
-                      "xpath": "//li[@class='js__tooltip']/img",
-                      "attribute": "src",
-                      "selector": "li.js__tooltip > img"
+                      "xpath": "//li[@class='js__tooltip']/img/@src",
+                      "selector": "li.js__tooltip > img",
+                      "attribute": "src"
                     }
                   },
                   "required": [
@@ -159,15 +159,15 @@
               "type": "object",
               "properties": {
                 "id": {
-                  "xpath": "/a[@class='entry__freecompany__link']",
-                  "attribute": "href",
+                  "xpath": "/a[@class='entry__freecompany__link']/@href",
                   "selector": "a.entry__freecompany__link",
+                  "attribute": "href",
                   "type": "string",
                   "pattern": "lodestone\\/freecompany\\/(\\d+)\\/"
                 },
                 "name": {
                   "type": "string",
-                  "xpath": "/a[@class='entry__freecompany__link']/span",
+                  "xpath": "/a[@class='entry__freecompany__link']/span/text()",
                   "selector": "a.entry__freecompany__link > span"
                 },
                 "crest": {
@@ -176,9 +176,9 @@
                     "type": "string",
                     "format": "uri"
                   },
-                  "xpath": "/a[@class='entry__freecompany__link']//img",
-                  "attribute": "src",
-                  "selector": "a.entry__freecompany__link img"
+                  "xpath": "/a[@class='entry__freecompany__link']//img/@src",
+                  "selector": "a.entry__freecompany__link img",
+                  "attribute": "src"
                 }
               },
               "required": [

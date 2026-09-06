@@ -6,20 +6,20 @@
       "type": "object",
       "properties": {
         "id": {
-          "xpath": "/a",
+          "xpath": "/a[@class='entry__block']/@href",
+          "selector": "a.entry__block",
           "attribute": "href",
-          "selector": "a",
           "type": "string",
           "pattern": "lodestone\\/pvpteam\\/(\\S+)\\/"
         },
         "name": {
           "type": "string",
-          "xpath": "//p[@class='entry__name']",
+          "xpath": "//p[@class='entry__name']/text()",
           "selector": "p.entry__name"
         },
         "dcname": {
           "type": "string",
-          "xpath": "//p[@class='entry__world']",
+          "xpath": "//p[@class='entry__world']/text()",
           "selector": "p.entry__world"
         },
         "crest": {
@@ -28,9 +28,9 @@
             "type": "string",
             "format": "uri"
           },
-          "xpath": "//div[@class='entry__pvpteam__search__crest__image']/img",
-          "attribute": "src",
-          "selector": "div.entry__pvpteam__search__crest__image > img"
+          "xpath": "//div[@class='entry__pvpteam__search__crest__image']/img/@src",
+          "selector": "div.entry__pvpteam__search__crest__image > img",
+          "attribute": "src"
         }
       },
       "required": [
@@ -49,11 +49,11 @@
     "properties": {
       "name": {
         "type": "string",
-        "xpath": "//h2[@class='entry__pvpteam__name--team']"
+        "xpath": "//h2[@class='entry__pvpteam__name--team']/text()"
       },
       "dcname": {
         "type": "string",
-        "xpath": "//p[@class='entry__pvpteam__name--dc']"
+        "xpath": "//p[@class='entry__pvpteam__name--dc']/text()"
       },
       "crest": {
         "type": "array",
@@ -61,8 +61,7 @@
           "type": "string",
           "format": "uri"
         },
-        "xpath": "//div[@class='entry__pvpteam__crest__image']/img",
-        "attribute": "src"
+        "xpath": "//div[@class='entry__pvpteam__crest__image']/img/@src"
       },
       "members": {
         "type": "array",
@@ -71,26 +70,24 @@
           "properties": {
             "id": {
               "type": "string",
-              "xpath": "/a[@class='entry__bg']",
-              "attribute": "href"
+              "xpath": "/a[@class='entry__bg']/@href"
             },
             "name": {
               "type": "string",
-              "xpath": "//p[@class='entry__name']"
+              "xpath": "//p[@class='entry__name']/text()"
             },
             "avatar": {
               "type": "string",
               "format": "uri",
-              "xpath": "//div[@class='entry__chara__face']/img",
-              "attribute": "src"
+              "xpath": "//div[@class='entry__chara__face']/img/@src"
             },
             "worldname": {
-              "xpath": "//p[@class='entry__world']",
+              "xpath": "//p[@class='entry__world']/text()",
               "type": "string",
               "pattern": "(\\w+) \\[\\w+\\]"
             },
             "dcname": {
-              "xpath": "//p[@class='entry__world']",
+              "xpath": "//p[@class='entry__world']/text()",
               "type": "string",
               "pattern": "\\w+ \\[(\\w+)\\]"
             },
@@ -99,13 +96,12 @@
               "properties": {
                 "name": {
                   "type": "string",
-                  "xpath": "//ul[contains(@class, 'info')]/li/img[not(@class)]/following-sibling::span"
+                  "xpath": "//ul[contains(@class, 'info')]/li/img[not(@class)]/following-sibling::span/text()"
                 },
                 "icon": {
                   "type": "string",
                   "format": "uri",
-                  "xpath": "//ul[contains(@class, 'info')]/li[span]/img[not(@class)]",
-                  "attribute": "src"
+                  "xpath": "//ul[contains(@class, 'info')]/li[span]/img[not(@class)]/@src"
                 }
               },
               "required": [
@@ -117,8 +113,7 @@
               "type": "object",
               "properties": {
                 "name": {
-                  "xpath": "//li[@class='js__tooltip']",
-                  "attribute": "data-tooltip",
+                  "xpath": "//li[@class='js__tooltip']/@data-tooltip",
                   "type": "string",
                   "pattern": "(\\w+) \\/ \\w+"
                 },
@@ -126,16 +121,14 @@
                   "type": "object",
                   "properties": {
                     "name": {
-                      "xpath": "//li[@class='js__tooltip']",
-                      "attribute": "data-tooltip",
+                      "xpath": "//li[@class='js__tooltip']/@data-tooltip",
                       "type": "string",
                       "pattern": "\\w+ \\/ (\\w+)"
                     },
                     "icon": {
                       "type": "string",
                       "format": "uri",
-                      "xpath": "//li[@class='js__tooltip']/img",
-                      "attribute": "src"
+                      "xpath": "//li[@class='js__tooltip']/img/@src"
                     }
                   },
                   "required": [
@@ -150,7 +143,7 @@
               ]
             },
             "matches": {
-              "xpath": "//ul[contains(@class, '__info')]/li/img[contains(@class, 'entry__pvpteam__battle__icon')]/following-sibling::span",
+              "xpath": "//ul[contains(@class, '__info')]/li/img[contains(@class, 'entry__pvpteam__battle__icon')]/following-sibling::span/text()",
               "type": "number"
             }
           },
@@ -165,7 +158,7 @@
         "xpath": "//div[@class='pvpteam__member']/div[@class='entry']"
       },
       "formed": {
-        "xpath": "//span[@class='entry__pvpteam__data--formed']/span",
+        "xpath": "//span[@class='entry__pvpteam__data--formed']/span/text()",
         "type": "string"
       }
     },

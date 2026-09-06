@@ -6,34 +6,34 @@
       "type": "object",
       "properties": {
         "id": {
-          "xpath": "/a[@class='entry__link']",
-          "attribute": "href",
+          "xpath": "/a[@class='entry__link']/@href",
           "selector": "a.entry__link",
+          "attribute": "href",
           "type": "string",
           "pattern": "lodestone\\/character\\/(\\d+)\\/"
         },
         "name": {
           "type": "string",
-          "xpath": "//p[@class='entry__name']",
+          "xpath": "//p[@class='entry__name']/text()",
           "selector": "p.entry__name"
         },
         "avatar": {
           "type": "string",
           "format": "uri",
-          "xpath": "//div[@class='entry__chara__face']/img",
-          "attribute": "src",
-          "selector": "div.entry__chara__face > img"
+          "xpath": "//div[@class='entry__chara__face']/img/@src",
+          "selector": "div.entry__chara__face > img",
+          "attribute": "src"
         },
         "worldname": {
           "type": "string",
           "pattern": "(\\w+) \\[\\w+\\]",
-          "xpath": "//p[@class='entry__world'][2]",
+          "xpath": "//p[@class='entry__world'][2]/text()",
           "selector": "p.entry__world:nth-of-type(2)"
         },
         "dcname": {
           "type": "string",
           "pattern": "\\w+ \\[(\\w+)\\]",
-          "xpath": "//p[@class='entry__world'][2]",
+          "xpath": "//p[@class='entry__world'][2]/text()",
           "selector": "p.entry__world:nth-of-type(2)"
         },
         "lang": {
@@ -41,16 +41,16 @@
           "items": {
             "type": "string"
           },
-          "xpath": "//div[@class='entry__chara__lang']",
+          "xpath": "//div[@class='entry__chara__lang']/text()",
           "selector": "div.entry__chara__lang"
         },
         "grandcompany": {
           "type": "object",
           "properties": {
             "name": {
-              "xpath": "//li[@class='js__tooltip']",
-              "attribute": "data-tooltip",
+              "xpath": "//li[@class='js__tooltip']/@data-tooltip",
               "selector": "li.js__tooltip",
+              "attribute": "data-tooltip",
               "type": "string",
               "pattern": "(\\w+) \\/ \\w+"
             },
@@ -58,18 +58,18 @@
               "type": "object",
               "properties": {
                 "name": {
-                  "xpath": "//li[@class='js__tooltip']",
-                  "attribute": "data-tooltip",
+                  "xpath": "//li[@class='js__tooltip']/@data-tooltip",
                   "selector": "li.js__tooltip",
+                  "attribute": "data-tooltip",
                   "type": "string",
                   "pattern": "\\w+ \\/ (\\w+)"
                 },
                 "icon": {
                   "type": "string",
                   "format": "uri",
-                  "xpath": "//li[@class='js__tooltip']/img",
-                  "attribute": "src",
-                  "selector": "li.js__tooltip > img"
+                  "xpath": "//li[@class='js__tooltip']/img/@src",
+                  "selector": "li.js__tooltip > img",
+                  "attribute": "src"
                 }
               },
               "required": [
@@ -87,15 +87,15 @@
           "type": "object",
           "properties": {
             "id": {
-              "xpath": "/a[@class='entry__freecompany__link']",
-              "attribute": "href",
+              "xpath": "/a[@class='entry__freecompany__link']/@href",
               "selector": "a.entry__freecompany__link",
+              "attribute": "href",
               "type": "string",
               "pattern": "lodestone\\/freecompany\\/(\\d+)\\/"
             },
             "name": {
               "type": "string",
-              "xpath": "/a[@class='entry__freecompany__link']/span",
+              "xpath": "/a[@class='entry__freecompany__link']/span/text()",
               "selector": "a.entry__freecompany__link > span"
             },
             "crest": {
@@ -104,9 +104,9 @@
                 "type": "string",
                 "format": "uri"
               },
-              "xpath": "/a[@class='entry__freecompany__link']/img",
-              "attribute": "src",
-              "selector": "a.entry__freecompany__link > img"
+              "xpath": "/a[@class='entry__freecompany__link']/img/@src",
+              "selector": "a.entry__freecompany__link > img",
+              "attribute": "src"
             }
           },
           "required": [
@@ -140,18 +140,18 @@
       "avatar": {
         "type": "string",
         "format": "uri",
-        "xpath": "//div[@class='frame__chara__face']/img",
-        "attribute": "src",
-        "selector": "div.frame__chara__face > img"
+        "xpath": "//div[@class='frame__chara__face']/img/@src",
+        "selector": "div.frame__chara__face > img",
+        "attribute": "src"
       },
       "worldname": {
-        "xpath": "//p[@class='entry__freecompany__gc'][2]",
+        "xpath": "//p[@class='entry__freecompany__gc'][2]/text()",
         "selector": "p.entry__freecompany__gc:nth-of-type(2)",
         "type": "string",
         "pattern": "(\\w+) \\[\\w+\\]"
       },
       "dcname": {
-        "xpath": "//p[@class='entry__freecompany__gc'][2]",
+        "xpath": "//p[@class='entry__freecompany__gc'][2]/text()",
         "selector": "p.entry__freecompany__gc:nth-of-type(2)",
         "type": "string",
         "pattern": "\\w+ \\[(\\w+)\\]"
@@ -159,9 +159,9 @@
       "portrait": {
         "type": "string",
         "format": "uri",
-        "xpath": "//div[@class='character__detail__image']//img",
-        "attribute": "src",
-        "selector": "div.character__detail__image img"
+        "xpath": "//div[@class='character__detail__image']//img/@src",
+        "selector": "div.character__detail__image img",
+        "attribute": "src"
       },
       "title": {
         "type": "string",
@@ -170,46 +170,46 @@
       },
       "bio": {
         "type": "string",
-        "xpath": "//div[@class='character__selfintroduction']",
+        "xpath": "//div[@class='character__selfintroduction']/text()",
         "selector": "div.character__selfintroduction"
       },
       "race": {
-        "xpath": "//div[@class='character__profile__data__detail']/div//p[@class='character-block__name']",
+        "xpath": "//div[@class='character__profile__data__detail']/div//p[@class='character-block__name']/text()",
         "selector": "div.character__profile__data__detail > div p.character-block__name",
         "type": "string",
         "pattern": "^(Hyur|Elezen|Lalafell|Miqo'te|Roegadyn|Au Ra|Hrothgar|Viera)"
       },
       "clan": {
-        "xpath": "//div[@class='character__profile__data__detail']/div//p[@class='character-block__name']",
+        "xpath": "//div[@class='character__profile__data__detail']/div//p[@class='character-block__name']/text()",
         "selector": "div.character__profile__data__detail > div p.character-block__name",
         "type": "string",
         "pattern": "^(Hyur|Elezen|Lalafell|Miqo'te|Roegadyn|Au Ra|Hrothgar|Viera)\\s*(Midlander|Highlander|Wildwood|Duskwight|Plainsfolk|Dunesfolk|Seeker of the Sun|Keeper of the Moon|Sea Wolf|Hellsguard|Raen|Xaela|Helions|The Lost|Rava|Veena)"
       },
       "gender": {
-        "xpath": "//div[@class='character__profile__data__detail']/div[1]//p[@class='character-block__name']",
+        "xpath": "//div[@class='character__profile__data__detail']/div[1]//p[@class='character-block__name']/text()",
         "selector": "div.character__profile__data__detail > div:first-of-type p.character-block__name",
         "type": "string"
       },
       "nameday": {
         "type": "string",
-        "xpath": "//p[@class='character-block__birth']",
+        "xpath": "//p[@class='character-block__birth']/text()",
         "selector": "p.character-block__birth"
       },
       "guardian": {
         "type": "string",
-        "xpath": "//div[@class='character__profile__data__detail']/div[2]//p[@class='character-block__name']",
+        "xpath": "//div[@class='character__profile__data__detail']/div[2]//p[@class='character-block__name']/text()",
         "selector": "div.character__profile__data__detail > div:nth-of-type(2) p.character-block__name"
       },
       "citystate": {
         "type": "string",
-        "xpath": "//div[@class='character__profile__data__detail']/div[3]//p[@class='character-block__name']",
+        "xpath": "//div[@class='character__profile__data__detail']/div[3]//p[@class='character-block__name']/text()",
         "selector": "div.character__profile__data__detail > div:nth-of-type(3) p.character-block__name"
       },
       "grandcompany": {
         "type": "object",
         "properties": {
           "name": {
-            "xpath": "//div[@class='character__profile__data__detail']/div[4]//p[@class='character-block__name']",
+            "xpath": "//div[@class='character__profile__data__detail']/div[4]//p[@class='character-block__name']/text()",
             "selector": "div.character__profile__data__detail > div:nth-of-type(4) p.character-block__name",
             "type": "string",
             "pattern": "(\\w+) \\/ \\w+"
@@ -226,9 +226,9 @@
               "icon": {
                 "type": "string",
                 "format": "uri",
-                "xpath": "//div[@class='character__profile__data__detail']/div[4]/img",
-                "attribute": "src",
-                "selector": "div.character__profile__data__detail > div:nth-of-type(4) > img"
+                "xpath": "//div[@class='character__profile__data__detail']/div[4]/img/@src",
+                "selector": "div.character__profile__data__detail > div:nth-of-type(4) > img",
+                "attribute": "src"
               }
             },
             "required": [
@@ -246,15 +246,15 @@
         "type": "object",
         "properties": {
           "id": {
-            "xpath": "//div[@class='character__freecompany__name']//a",
-            "attribute": "href",
+            "xpath": "//div[@class='character__freecompany__name']//a/@href",
             "selector": "div.character__freecompany__name a",
+            "attribute": "href",
             "type": "string",
             "pattern": "lodestone\\/freecompany\\/(\\S+)\\/"
           },
           "name": {
             "type": "string",
-            "xpath": "//div[@class='character__freecompany__name']//a",
+            "xpath": "//div[@class='character__freecompany__name']//a/text()",
             "selector": "div.character__freecompany__name a"
           },
           "crest": {
@@ -263,9 +263,9 @@
               "type": "string",
               "format": "uri"
             },
-            "xpath": "//div[@class='character__freecompany__crest']//img",
-            "attribute": "src",
-            "selector": "div.character__freecompany__crest img"
+            "xpath": "//div[@class='character__freecompany__crest']//img/@src",
+            "selector": "div.character__freecompany__crest img",
+            "attribute": "src"
           }
         },
         "required": [
@@ -278,15 +278,15 @@
         "type": "object",
         "properties": {
           "id": {
-            "xpath": "//div[@class='character__pvpteam__name']//a",
-            "attribute": "href",
+            "xpath": "//div[@class='character__pvpteam__name']//a/@href",
             "selector": "div.character__pvpteam__name a",
+            "attribute": "href",
             "type": "string",
             "pattern": "lodestone\\/pvpteam\\/(\\S+)\\/"
           },
           "name": {
             "type": "string",
-            "xpath": "//div[@class='character__pvpteam__name']//a",
+            "xpath": "//div[@class='character__pvpteam__name']//a/text()",
             "selector": "div.character__pvpteam__name a"
           },
           "crest": {
@@ -295,9 +295,9 @@
               "type": "string",
               "format": "uri"
             },
-            "xpath": "//div[@class='character__pvpteam__crest']//img",
-            "attribute": "src",
-            "selector": "div.character__pvpteam__crest img"
+            "xpath": "//div[@class='character__pvpteam__crest']//img/@src",
+            "selector": "div.character__pvpteam__crest img",
+            "attribute": "src"
           }
         },
         "required": [

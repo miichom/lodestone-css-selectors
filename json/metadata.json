@@ -5,34 +5,34 @@
     "properties": {
       "start": {
         "type": "string",
-        "xpath": "//a[@class='btn__pager__prev--all']",
+        "xpath": "//a[@class='btn__pager__prev--all']/text()",
         "selector": "a.btn__pager__prev--all"
       },
       "previous": {
         "type": "string",
-        "xpath": "//a[@class='btn__pager__prev']",
+        "xpath": "//a[@class='btn__pager__prev']/text()",
         "selector": "a.btn__pager__prev"
       },
       "current": {
-        "xpath": "//a[@class='btn__pager__current']",
+        "xpath": "//a[@class='btn__pager__current']/text()",
         "selector": "a.btn__pager__current",
         "type": "string",
         "pattern": "(\\d+)"
       },
       "pages": {
-        "xpath": "//a[@class='btn__pager__current']",
+        "xpath": "//a[@class='btn__pager__current']/text()",
         "selector": "a.btn__pager__current",
         "type": "string",
         "pattern": "(\\d+)"
       },
       "next": {
         "type": "string",
-        "xpath": "//a[@class='btn__pager__next']",
+        "xpath": "//a[@class='btn__pager__next']/text()",
         "selector": "a.btn__pager__next"
       },
       "end": {
         "type": "string",
-        "xpath": "//a[@class='btn__pager__next--all']",
+        "xpath": "//a[@class='btn__pager__next--all']/text()",
         "selector": "a.btn__pager__next--all"
       }
     },
