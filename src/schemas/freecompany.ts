@@ -5,7 +5,9 @@ import { resolveSchema } from "../lib/utils.ts";
 // /lodestone/freecompany/{id}
 export const profile = resolveSchema(
   z.object({
-    name: z.string().meta({ xpath: "//p[@class='entry__freecompany__name']/text()" }),
+    name: z
+      .string()
+      .meta({ xpath: "//p[@class='entry__freecompany__name']/text()" }),
     worldname: z
       .string()
       .regex(/(\w+) \[\w+\]/)
@@ -40,7 +42,8 @@ export const profile = resolveSchema(
       xpath: "//p[@class='freecompany__text freecompany__text__tag']/text()",
     }),
     slogan: z.string().meta({
-      xpath: "//p[@class='freecompany__text freecompany__text__message']/text()",
+      xpath:
+        "//p[@class='freecompany__text freecompany__text__message']/text()",
     }),
     formed: z
       .string()
@@ -106,7 +109,8 @@ export const profile = resolveSchema(
       })
       .optional(),
     active: z.string().meta({
-      xpath: "//div[@class='ldst__window'][2]//p[@class='freecompany__text']/text()",
+      xpath:
+        "//div[@class='ldst__window'][2]//p[@class='freecompany__text']/text()",
     }),
     recruiting: z
       .string()
@@ -121,7 +125,8 @@ export const profile = resolveSchema(
         })
       )
       .meta({
-        xpath: "//ul[@class='freecompany__focus_icon'][1]/li[not(@class)]/text()",
+        xpath:
+          "//ul[@class='freecompany__focus_icon'][1]/li[not(@class)]/text()",
       }),
     seeking: z
       .array(
@@ -131,7 +136,8 @@ export const profile = resolveSchema(
         })
       )
       .meta({
-        xpath: "//ul[@class='freecompany__focus_icon'][2]/li[not(@class)]/text()",
+        xpath:
+          "//ul[@class='freecompany__focus_icon'][2]/li[not(@class)]/text()",
       }),
   })
 );
@@ -170,7 +176,8 @@ const member = resolveSchema(
         rank: z
           .object({
             name: z.string().meta({
-              xpath: "//ul[@class='entry__freecompany__info']/li[1]/span/text()",
+              xpath:
+                "//ul[@class='entry__freecompany__info']/li[1]/span/text()",
             }),
             icon: z.url().meta({
               xpath: "//ul[@class='entry__freecompany__info']/li[1]/img/@src",
@@ -313,10 +320,14 @@ export const entries = resolveSchema(
           .meta({ xpath: "//p[@class='entry__world'][1]/text()" }),
         members: z.coerce
           .number()
-          .meta({ xpath: "//li[@class='entry__freecompany__fc-member']/text()" }),
+          .meta({
+            xpath: "//li[@class='entry__freecompany__fc-member']/text()",
+          }),
         estate: z
           .string()
-          .meta({ xpath: "//li[@class='entry__freecompany__fc-housing']/text()" }),
+          .meta({
+            xpath: "//li[@class='entry__freecompany__fc-housing']/text()",
+          }),
         formed: z
           .string()
           .regex(/ldst_strftime\((\d+)/)
@@ -327,7 +338,9 @@ export const entries = resolveSchema(
               : new Date(value);
           })
           .pipe(z.date())
-          .meta({ xpath: "//li[@class='entry__freecompany__fc-day']/script/text()" }),
+          .meta({
+            xpath: "//li[@class='entry__freecompany__fc-day']/script/text()",
+          }),
         active: z
           .string()
           .transform((value) => value.toLowerCase().includes("always"))

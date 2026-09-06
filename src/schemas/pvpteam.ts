@@ -27,7 +27,7 @@ export const profile = z.object({
           .string()
           .regex(/(\w+) \[\w+\]/)
           .transform(
-            (val) => val.match(/(\w+) \[\w+\]/)?.[1].trim() ?? val.trim(),
+            (val) => val.match(/(\w+) \[\w+\]/)?.[1].trim() ?? val.trim()
           )
           .meta({
             xpath: "//p[@class='entry__world']/text()",
@@ -36,7 +36,7 @@ export const profile = z.object({
           .string()
           .regex(/\w+ \[(\w+)\]/)
           .transform(
-            (val) => val.match(/\w+ \[(\w+)\]/)?.[1].trim() ?? val.trim(),
+            (val) => val.match(/\w+ \[(\w+)\]/)?.[1].trim() ?? val.trim()
           )
           .meta({
             xpath: "//p[@class='entry__world']/text()",
@@ -59,7 +59,7 @@ export const profile = z.object({
               .string()
               .regex(/(\w+) \/ \w+/)
               .transform(
-                (val) => val.match(/(\w+) \/ \w+/)?.[1].trim() ?? val.trim(),
+                (val) => val.match(/(\w+) \/ \w+/)?.[1].trim() ?? val.trim()
               )
               .meta({
                 xpath: "//li[@class='js__tooltip']/@data-tooltip",
@@ -69,7 +69,7 @@ export const profile = z.object({
                 .string()
                 .regex(/\w+ \/ (\w+)/)
                 .transform(
-                  (val) => val.match(/\w+ \/ (\w+)/)?.[1].trim() ?? val.trim(),
+                  (val) => val.match(/\w+ \/ (\w+)/)?.[1].trim() ?? val.trim()
                 )
                 .meta({
                   xpath: "//li[@class='js__tooltip']/@data-tooltip",
@@ -84,7 +84,7 @@ export const profile = z.object({
           xpath:
             "//ul[contains(@class, '__info')]/li/img[contains(@class, 'entry__pvpteam__battle__icon')]/following-sibling::span/text()",
         }),
-      }),
+      })
     )
     .meta({
       xpath: "//div[@class='pvpteam__member']/div[@class='entry']",
@@ -114,8 +114,7 @@ export const entries = resolveSchema(
           .regex(/lodestone\/pvpteam\/(\S+)\//)
           .transform(
             (val) =>
-              val.match(/lodestone\/pvpteam\/(\S+)\//)?.[1].trim() ??
-              val.trim(),
+              val.match(/lodestone\/pvpteam\/(\S+)\//)?.[1].trim() ?? val.trim()
           )
           .meta({
             xpath: "/a[@class='entry__block']/@href",
@@ -126,9 +125,9 @@ export const entries = resolveSchema(
           xpath:
             "//div[@class='entry__pvpteam__search__crest__image']/img/@src",
         }),
-      }),
+      })
     )
     .meta({
       xpath: "//div[@class='ldst__window']//div[@class='entry']",
-    }),
+    })
 );

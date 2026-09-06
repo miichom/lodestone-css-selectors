@@ -39,7 +39,7 @@ export const profile = resolveSchema(
       .transform(
         (val) =>
           val.match(new RegExp(`^(${Object.keys(Race).join("|")})`))?.[1] ??
-          val.trim(),
+          val.trim()
       )
       .meta({
         xpath:
@@ -49,16 +49,16 @@ export const profile = resolveSchema(
       .string()
       .regex(
         new RegExp(
-          `^(${Object.keys(Race).join("|")})\\s*(${Object.keys(Tribe).join("|")})`,
-        ),
+          `^(${Object.keys(Race).join("|")})\\s*(${Object.keys(Tribe).join("|")})`
+        )
       )
       .transform(
         (val) =>
           val.match(
             new RegExp(
-              `^(${Object.keys(Race).join("|")})\\s*(${Object.keys(Tribe).join("|")})`,
-            ),
-          )?.[2] as string,
+              `^(${Object.keys(Race).join("|")})\\s*(${Object.keys(Tribe).join("|")})`
+            )
+          )?.[2] as string
       )
       .meta({
         xpath:
@@ -88,7 +88,7 @@ export const profile = resolveSchema(
           .string()
           .regex(/(\w+) \/ \w+/)
           .transform(
-            (val) => val.match(/(\w+) \/ \w+/)?.[1].trim() ?? val.trim(),
+            (val) => val.match(/(\w+) \/ \w+/)?.[1].trim() ?? val.trim()
           )
           .meta({
             xpath:
@@ -99,7 +99,7 @@ export const profile = resolveSchema(
             .string()
             .regex(/\w+ \/ (\w+)/)
             .transform(
-              (val) => val.match(/\w+ \/ (\w+)/)?.[1].trim() ?? val.trim(),
+              (val) => val.match(/\w+ \/ (\w+)/)?.[1].trim() ?? val.trim()
             )
             .meta({
               xpath:
@@ -120,7 +120,7 @@ export const profile = resolveSchema(
           .transform(
             (val) =>
               val.match(/lodestone\/freecompany\/(\S+)\//)?.[1].trim() ??
-              val.trim(),
+              val.trim()
           )
           .meta({
             xpath: "//div[@class='character__freecompany__name']//a/@href",
@@ -140,8 +140,7 @@ export const profile = resolveSchema(
           .regex(/lodestone\/pvpteam\/(\S+)\//)
           .transform(
             (val) =>
-              val.match(/lodestone\/pvpteam\/(\S+)\//)?.[1].trim() ??
-              val.trim(),
+              val.match(/lodestone\/pvpteam\/(\S+)\//)?.[1].trim() ?? val.trim()
           )
           .meta({
             xpath: "//div[@class='character__pvpteam__name']//a/@href",
@@ -154,7 +153,7 @@ export const profile = resolveSchema(
         }),
       })
       .optional(),
-  }),
+  })
 );
 
 export const query = z.object({
@@ -203,7 +202,7 @@ export const entries = resolveSchema(
           .transform(
             (val) =>
               val.match(/lodestone\/character\/(\d+)\//)?.[1].trim() ??
-              val.trim(),
+              val.trim()
           )
           .meta({
             xpath: "/a[@class='entry__link']/@href",
@@ -233,7 +232,7 @@ export const entries = resolveSchema(
               .string()
               .regex(/(\w+) \/ \w+/)
               .transform(
-                (val) => val.match(/(\w+) \/ \w+/)?.[1].trim() ?? val.trim(),
+                (val) => val.match(/(\w+) \/ \w+/)?.[1].trim() ?? val.trim()
               )
               .meta({
                 xpath: "//li[@class='js__tooltip']/@data-tooltip",
@@ -243,7 +242,7 @@ export const entries = resolveSchema(
                 .string()
                 .regex(/\w+ \/ (\w+)/)
                 .transform(
-                  (val) => val.match(/\w+ \/ (\w+)/)?.[1].trim() ?? val.trim(),
+                  (val) => val.match(/\w+ \/ (\w+)/)?.[1].trim() ?? val.trim()
                 )
                 .meta({
                   xpath: "//li[@class='js__tooltip']/@data-tooltip",
@@ -262,7 +261,7 @@ export const entries = resolveSchema(
               .transform(
                 (val) =>
                   val.match(/lodestone\/freecompany\/(\d+)\//)?.[1].trim() ??
-                  val.trim(),
+                  val.trim()
               )
               .meta({
                 xpath: "/a[@class='entry__freecompany__link']/@href",
@@ -275,9 +274,9 @@ export const entries = resolveSchema(
             }),
           })
           .optional(),
-      }),
+      })
     )
     .meta({
       xpath: "//div[@class='ldst__window']//div[@class='entry']",
-    }),
+    })
 );

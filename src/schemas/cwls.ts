@@ -23,7 +23,7 @@ export const profile = resolveSchema(
             .transform(
               (val) =>
                 val.match(/lodestone\/character\/(\d+)\//)?.[1].trim() ??
-                val.trim(),
+                val.trim()
             )
             .meta({
               xpath: "/a[@class='entry__link']/@href",
@@ -36,7 +36,7 @@ export const profile = resolveSchema(
             .string()
             .regex(/(\w+) \[\w+\]/)
             .transform(
-              (val) => val.match(/(\w+) \[\w+\]/)?.[1].trim() ?? val.trim(),
+              (val) => val.match(/(\w+) \[\w+\]/)?.[1].trim() ?? val.trim()
             )
             .meta({
               xpath: "//p[@class='entry__world']/text()",
@@ -45,7 +45,7 @@ export const profile = resolveSchema(
             .string()
             .regex(/\w+ \[(\w+)\]/)
             .transform(
-              (val) => val.match(/\w+ \[(\w+)\]/)?.[1].trim() ?? val.trim(),
+              (val) => val.match(/\w+ \[(\w+)\]/)?.[1].trim() ?? val.trim()
             )
             .meta({
               xpath: "//p[@class='entry__world']/text()",
@@ -90,7 +90,7 @@ export const profile = resolveSchema(
                 .transform(
                   (val) =>
                     val.match(/lodestone\/freecompany\/(\d+)\//)?.[1].trim() ??
-                    val.trim(),
+                    val.trim()
                 )
                 .meta({
                   xpath: "/a[@class='entry__freecompany__link']/@href",
@@ -103,7 +103,7 @@ export const profile = resolveSchema(
               }),
             })
             .optional(),
-        }),
+        })
       )
       .meta({
         xpath: "//div[@class='ls__member']/div[@class='entry']",
@@ -111,7 +111,7 @@ export const profile = resolveSchema(
     formed: z.coerce
       .date()
       .meta({ xpath: "//span[@class='heading__cwls__formed']/span" }),
-  }),
+  })
 );
 
 export const query = z.object({
@@ -137,7 +137,7 @@ export const entries = resolveSchema(
             (val) =>
               val
                 .match(/lodestone\/crossworld_linkshell\/(\S+)\//)?.[1]
-                .trim() ?? val.trim(),
+                .trim() ?? val.trim()
           )
           .meta({
             xpath: "/a[@class='entry__link--line']/@href",
@@ -147,9 +147,9 @@ export const entries = resolveSchema(
         members: z.coerce.number().meta({
           xpath: "//div[@class='entry__linkshell__member']//span/text()",
         }),
-      }),
+      })
     )
     .meta({
       xpath: "//div[@class='ldst__window']//div[@class='entry']",
-    }),
+    })
 );
