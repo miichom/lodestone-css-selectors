@@ -5,20 +5,20 @@ import { resolveSchema } from "../lib/utils.ts";
 // /lodestone/freecompany/{id}
 export const profile = resolveSchema(
   z.object({
-    name: z.string().meta({ xpath: "//p[@class='entry__freecompany__name']" }),
+    name: z.string().meta({ xpath: "//p[@class='entry__freecompany__name']/text()" }),
     worldname: z
       .string()
       .regex(/(\w+) \[\w+\]/)
       .transform((val) => val.match(/(\w+) \[\w+\]/)?.[1].trim() ?? val.trim())
       .meta({
-        xpath: "//p[@class='entry__freecompany__gc'][2]",
+        xpath: "//p[@class='entry__freecompany__gc'][2]/text()",
       }),
     dcname: z
       .string()
       .regex(/\w+ \[(\w+)\]/)
       .transform((val) => val.match(/\w+ \[(\w+)\]/)?.[1].trim() ?? val.trim())
       .meta({
-        xpath: "//p[@class='entry__freecompany__gc'][2]",
+        xpath: "//p[@class='entry__freecompany__gc'][2]/text()",
       }),
     grandcompany: z.object({
       name: z
@@ -26,21 +26,21 @@ export const profile = resolveSchema(
         .regex(/(\w+) <\w+>/)
         .transform((val) => val.match(/(\w+) <\w+>/)?.[1].trim() ?? val.trim())
         .meta({
-          xpath: "//p[@class='entry__freecompany__gc']",
+          xpath: "//p[@class='entry__freecompany__gc']/text()",
         }),
       rank: z
         .string()
         .regex(/\w+ <(\w+)>/)
         .transform((val) => val.match(/\w+ <(\w+)>/)?.[1].trim() ?? val.trim())
         .meta({
-          xpath: "//p[@class='entry__freecompany__gc']",
+          xpath: "//p[@class='entry__freecompany__gc']/text()",
         }),
     }),
     tag: z.string().meta({
-      xpath: "//p[@class='freecompany__text freecompany__text__tag']",
+      xpath: "//p[@class='freecompany__text freecompany__text__tag']/text()",
     }),
     slogan: z.string().meta({
-      xpath: "//p[@class='freecompany__text freecompany__text__message']",
+      xpath: "//p[@class='freecompany__text freecompany__text__message']/text()",
     }),
     formed: z
       .string()
@@ -51,26 +51,25 @@ export const profile = resolveSchema(
       })
       .pipe(z.date())
       .meta({
-        xpath: "//p[@class='freecompany__text']/script",
+        xpath: "//p[@class='freecompany__text']/script/text()",
       }),
     members: z.coerce
       .number()
-      .meta({ xpath: "//div[@class='ldst__window'][1]/p[6]" }),
+      .meta({ xpath: "//div[@class='ldst__window'][1]/p[6]/text()" }),
     rank: z.coerce
       .number()
-      .meta({ xpath: "//div[@class='ldst__window'][1]/p[7]" }),
+      .meta({ xpath: "//div[@class='ldst__window'][1]/p[7]/text()" }),
     reputation: z
       .array(
         z.object({
           name: z.string().meta({
-            xpath: "//p[@class='freecompany__reputation__gcname']",
+            xpath: "//p[@class='freecompany__reputation__gcname']/text()",
           }),
           icon: z.url().meta({
-            xpath: "/div[@class='freecompany__reputation__icon']/img",
-            attribute: "src",
+            xpath: "/div[@class='freecompany__reputation__icon']/img/@src",
           }),
           rank: z.string().meta({
-            xpath: "//p[@class='freecompany__reputation__rank']",
+            xpath: "//p[@class='freecompany__reputation__rank']/text()",
           }),
         })
       )
@@ -82,7 +81,7 @@ export const profile = resolveSchema(
         .transform((val) => Number(val.match(/(\d+)/)?.[1].trim() ?? 0))
         .pipe(z.number())
         .meta({
-          xpath: "//table[@class='character__ranking__data']//tr[1]/th",
+          xpath: "//table[@class='character__ranking__data']//tr[1]/th/text()",
         }),
       monthly: z
         .string()
@@ -90,30 +89,30 @@ export const profile = resolveSchema(
         .transform((val) => Number(val.match(/(\d+)/)?.[1].trim() ?? 0))
         .pipe(z.number())
         .meta({
-          xpath: "//table[@class='character__ranking__data']//tr[2]/th",
+          xpath: "//table[@class='character__ranking__data']//tr[2]/th/text()",
         }),
     }),
     estate: z
       .object({
         name: z.string().meta({
-          xpath: "//p[@class='freecompany__estate__name']",
+          xpath: "//p[@class='freecompany__estate__name']/text()",
         }),
         address: z.string().meta({
-          xpath: "//p[@class='freecompany__estate__text']",
+          xpath: "//p[@class='freecompany__estate__text']/text()",
         }),
         greeting: z.string().meta({
-          xpath: "//p[@class='freecompany__estate__greeting']",
+          xpath: "//p[@class='freecompany__estate__greeting']/text()",
         }),
       })
       .optional(),
     active: z.string().meta({
-      xpath: "//div[@class='ldst__window'][2]//p[@class='freecompany__text']",
+      xpath: "//div[@class='ldst__window'][2]//p[@class='freecompany__text']/text()",
     }),
     recruiting: z
       .string()
       .transform((val) => val.toLowerCase().includes("open"))
       .pipe(z.boolean())
-      .meta({ xpath: "//p[@class='freecompany__recruitment']" }),
+      .meta({ xpath: "//p[@class='freecompany__recruitment']/text()" }),
     focus: z
       .array(
         z.object({
@@ -122,7 +121,7 @@ export const profile = resolveSchema(
         })
       )
       .meta({
-        xpath: "//ul[@class='freecompany__focus_icon'][1]/li[not(@class)]",
+        xpath: "//ul[@class='freecompany__focus_icon'][1]/li[not(@class)]/text()",
       }),
     seeking: z
       .array(
@@ -132,7 +131,7 @@ export const profile = resolveSchema(
         })
       )
       .meta({
-        xpath: "//ul[@class='freecompany__focus_icon'][2]/li[not(@class)]",
+        xpath: "//ul[@class='freecompany__focus_icon'][2]/li[not(@class)]/text()",
       }),
   })
 );
@@ -148,8 +147,8 @@ const member = resolveSchema(
           .transform((value) =>
             value.match(/lodestone\/character\/(\d+)\//)?.[1].trim()
           )
-          .meta({ xpath: "/a", attribute: "href" }),
-        name: z.string().meta({ xpath: "//p[@class='entry__name']" }),
+          .meta({ xpath: "/a/@href" }),
+        name: z.string().meta({ xpath: "//p[@class='entry__name']/text()" }),
         avatar: z.url().meta({
           xpath: "//div[@class='entry__chara__face']/img",
           attribute: "src",
@@ -160,22 +159,21 @@ const member = resolveSchema(
           .transform(
             (value) => value.match(/(\w+) \[\w+\]/)?.[1].trim() as string
           )
-          .meta({ xpath: "//p[@class='entry__world']" }),
+          .meta({ xpath: "//p[@class='entry__world']/text()" }),
         dcname: z
           .string()
           .regex(/\w+ \[(\w+)\]/)
           .transform(
             (value) => value.match(/\w+ \[(\w+)\]/)?.[1].trim() as string
           )
-          .meta({ xpath: "//p[@class='entry__world']" }),
+          .meta({ xpath: "//p[@class='entry__world']/text()" }),
         rank: z
           .object({
             name: z.string().meta({
-              xpath: "//ul[@class='entry__freecompany__info']/li[1]/span",
+              xpath: "//ul[@class='entry__freecompany__info']/li[1]/span/text()",
             }),
             icon: z.url().meta({
-              xpath: "//ul[@class='entry__freecompany__info']/li[1]/img",
-              attribute: "src",
+              xpath: "//ul[@class='entry__freecompany__info']/li[1]/img/@src",
             }),
           })
           .optional(),
@@ -188,8 +186,7 @@ const member = resolveSchema(
                 (value) => value.match(/(\w+) \/ \w+/)?.[1].trim() as string
               )
               .meta({
-                xpath: "//li[@class='js__tooltip']",
-                attribute: "data-tooltip",
+                xpath: "//li[@class='js__tooltip']/@data-tooltip",
               }),
             rank: z.object({
               name: z
@@ -199,12 +196,10 @@ const member = resolveSchema(
                   (value) => value.match(/\w+ \/ (\w+)/)?.[1].trim() as string
                 )
                 .meta({
-                  xpath: "//li[@class='js__tooltip']",
-                  attribute: "data-tooltip",
+                  xpath: "//li[@class='js__tooltip']/@data-tooltip",
                 }),
               icon: z.url().meta({
-                xpath: "//li[@class='js__tooltip']/img",
-                attribute: "src",
+                xpath: "//li[@class='js__tooltip']/img/@src",
               }),
             }),
           })
@@ -294,35 +289,34 @@ export const entries = resolveSchema(
               value.match(/lodestone\/freecompany\/(\d+)\//)?.[1].trim() ??
               value.trim()
           )
-          .meta({ xpath: "/a", attribute: "href" }),
-        name: z.string().meta({ xpath: "//p[@class='entry__name']" }),
+          .meta({ xpath: "/a[@class='entry__block']/@href" }),
+        name: z.string().meta({ xpath: "//p[@class='entry__name']/text()" }),
         worldname: z
           .string()
           .regex(/(\w+) \[\w+\]/)
           .transform(
             (value) => value.match(/(\w+) \[\w+\]/)?.[1].trim() as string
           )
-          .meta({ xpath: "//p[@class='entry__world'][2]" }),
+          .meta({ xpath: "//p[@class='entry__world'][2]/text()" }),
         dcname: z
           .string()
           .regex(/\w+ \[(\w+)\]/)
           .transform(
             (value) => value.match(/\w+ \[(\w+)\]/)?.[1].trim() as string
           )
-          .meta({ xpath: "//p[@class='entry__world'][2]" }),
+          .meta({ xpath: "//p[@class='entry__world'][2]/text()" }),
         crest: z.array(z.url()).meta({
-          xpath: "//div[@class='entry__freecompany__crest__image']/img",
-          attribute: "src",
+          xpath: "//div[@class='entry__freecompany__crest__image']/img/@src",
         }),
         grandcompany: z
           .string()
-          .meta({ xpath: "//p[@class='entry__world'][1]" }),
+          .meta({ xpath: "//p[@class='entry__world'][1]/text()" }),
         members: z.coerce
           .number()
-          .meta({ xpath: "//li[@class='entry__freecompany__fc-member']" }),
+          .meta({ xpath: "//li[@class='entry__freecompany__fc-member']/text()" }),
         estate: z
           .string()
-          .meta({ xpath: "//li[@class='entry__freecompany__fc-housing']" }),
+          .meta({ xpath: "//li[@class='entry__freecompany__fc-housing']/text()" }),
         formed: z
           .string()
           .regex(/ldst_strftime\((\d+)/)
@@ -333,14 +327,14 @@ export const entries = resolveSchema(
               : new Date(value);
           })
           .pipe(z.date())
-          .meta({ xpath: "//li[@class='entry__freecompany__fc-day']/script" }),
+          .meta({ xpath: "//li[@class='entry__freecompany__fc-day']/script/text()" }),
         active: z
           .string()
           .transform((value) => value.toLowerCase().includes("always"))
           .pipe(z.boolean())
           .meta({
             xpath:
-              "//ul[contains(@class, 'entry__freecompany__fc-data')]/li[4]",
+              "//ul[contains(@class, 'entry__freecompany__fc-data')]/li[4]/text()",
           }),
         recuiting: z
           .string()
@@ -348,7 +342,7 @@ export const entries = resolveSchema(
           .pipe(z.boolean())
           .meta({
             xpath:
-              "//ul[contains(@class, 'entry__freecompany__fc-data')]/li[5]",
+              "//ul[contains(@class, 'entry__freecompany__fc-data')]/li[5]/text()",
           }),
       })
     )

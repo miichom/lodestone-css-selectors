@@ -5,13 +5,14 @@ import { resolveSchema } from "../lib/utils.ts";
 // /lodestone/crossworld_linkshell/{id}
 export const profile = resolveSchema(
   z.object({
-    name: z.string().meta({ xpath: "//h3[@class='heading__linkshell__name']" }),
+    name: z
+      .string()
+      .meta({ xpath: "//h3[@class='heading__linkshell__name']/text()" }),
     dcname: z
       .string()
-      .meta({ xpath: "//span[@class='heading__cwls__dcname']" }),
+      .meta({ xpath: "//span[@class='heading__cwls__dcname']/text()" }),
     icon: z.url().meta({
-      xpath: "//div[@class='heading__linkshell__icon']/img",
-      attribute: "src",
+      xpath: "//div[@class='heading__linkshell__icon']/img/@src",
     }),
     members: z
       .array(
@@ -22,43 +23,41 @@ export const profile = resolveSchema(
             .transform(
               (val) =>
                 val.match(/lodestone\/character\/(\d+)\//)?.[1].trim() ??
-                val.trim()
+                val.trim(),
             )
             .meta({
-              xpath: "/a[@class='entry__link']",
-              attribute: "href",
+              xpath: "/a[@class='entry__link']/@href",
             }),
-          name: z.string().meta({ xpath: "//p[@class='entry__name']" }),
+          name: z.string().meta({ xpath: "//p[@class='entry__name']/text()" }),
           avatar: z.url().meta({
-            xpath: "//div[@class='entry__chara__face']/img",
-            attribute: "src",
+            xpath: "//div[@class='entry__chara__face']/img/@src",
           }),
           worldname: z
             .string()
             .regex(/(\w+) \[\w+\]/)
             .transform(
-              (val) => val.match(/(\w+) \[\w+\]/)?.[1].trim() ?? val.trim()
+              (val) => val.match(/(\w+) \[\w+\]/)?.[1].trim() ?? val.trim(),
             )
             .meta({
-              xpath: "//p[@class='entry__world']",
+              xpath: "//p[@class='entry__world']/text()",
             }),
           dcname: z
             .string()
             .regex(/\w+ \[(\w+)\]/)
             .transform(
-              (val) => val.match(/\w+ \[(\w+)\]/)?.[1].trim() ?? val.trim()
+              (val) => val.match(/\w+ \[(\w+)\]/)?.[1].trim() ?? val.trim(),
             )
             .meta({
-              xpath: "//p[@class='entry__world']",
+              xpath: "//p[@class='entry__world']/text()",
             }),
           rank: z
             .object({
               name: z.string().meta({
-                xpath: "//div[@class='entry__chara_info__linkshell']/span",
+                xpath:
+                  "//div[@class='entry__chara_info__linkshell']/span/text()",
               }),
               icon: z.url().meta({
-                xpath: "//div[@class='entry__chara_info__linkshell']/img",
-                attribute: "src",
+                xpath: "//div[@class='entry__chara_info__linkshell']/img/@src",
               }),
             })
             .optional(),
@@ -68,20 +67,17 @@ export const profile = resolveSchema(
                 .string()
                 .regex(/(\w+) \/ \w+/)
                 .meta({
-                  xpath: "//li[@class='js__tooltip']",
-                  attribute: "data-tooltip",
+                  xpath: "//li[@class='js__tooltip']/@data-tooltip",
                 }),
               rank: z.object({
                 name: z
                   .string()
                   .regex(/\w+ \/ (\w+)/)
                   .meta({
-                    xpath: "//li[@class='js__tooltip']",
-                    attribute: "data-tooltip",
+                    xpath: "//li[@class='js__tooltip']/@data-tooltip",
                   }),
                 icon: z.url().meta({
-                  xpath: "//li[@class='js__tooltip']/img",
-                  attribute: "src",
+                  xpath: "//li[@class='js__tooltip']/img/@src",
                 }),
               }),
             })
@@ -94,22 +90,20 @@ export const profile = resolveSchema(
                 .transform(
                   (val) =>
                     val.match(/lodestone\/freecompany\/(\d+)\//)?.[1].trim() ??
-                    val.trim()
+                    val.trim(),
                 )
                 .meta({
-                  xpath: "/a[@class='entry__freecompany__link']",
-                  attribute: "href",
+                  xpath: "/a[@class='entry__freecompany__link']/@href",
                 }),
               name: z.string().meta({
-                xpath: "/a[@class='entry__freecompany__link']/span",
+                xpath: "/a[@class='entry__freecompany__link']/span/text()",
               }),
               crest: z.array(z.url()).meta({
-                xpath: "/a[@class='entry__freecompany__link']//img",
-                attribute: "src",
+                xpath: "/a[@class='entry__freecompany__link']//img/@src",
               }),
             })
             .optional(),
-        })
+        }),
       )
       .meta({
         xpath: "//div[@class='ls__member']/div[@class='entry']",
@@ -117,7 +111,7 @@ export const profile = resolveSchema(
     formed: z.coerce
       .date()
       .meta({ xpath: "//span[@class='heading__cwls__formed']/span" }),
-  })
+  }),
 );
 
 export const query = z.object({
@@ -143,20 +137,19 @@ export const entries = resolveSchema(
             (val) =>
               val
                 .match(/lodestone\/crossworld_linkshell\/(\S+)\//)?.[1]
-                .trim() ?? val.trim()
+                .trim() ?? val.trim(),
           )
           .meta({
-            xpath: "/a",
-            attribute: "href",
+            xpath: "/a[@class='entry__link--line']/@href",
           }),
-        name: z.string().meta({ xpath: "//p[@class='entry__name']" }),
-        dcname: z.string().meta({ xpath: "//p[@class='entry__world']" }),
+        name: z.string().meta({ xpath: "//p[@class='entry__name']/text()" }),
+        dcname: z.string().meta({ xpath: "//p[@class='entry__world']/text()" }),
         members: z.coerce.number().meta({
-          xpath: "//div[@class='entry__linkshell__member']//span",
+          xpath: "//div[@class='entry__linkshell__member']//span/text()",
         }),
-      })
+      }),
     )
     .meta({
       xpath: "//div[@class='ldst__window']//div[@class='entry']",
-    })
+    }),
 );

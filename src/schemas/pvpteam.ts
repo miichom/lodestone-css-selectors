@@ -4,51 +4,52 @@ import { resolveSchema } from "../lib/utils.ts";
 
 // /lodestone/pvpteam/{id}
 export const profile = z.object({
-  name: z.string().meta({ xpath: "//h2[@class='entry__pvpteam__name--team']" }),
-  dcname: z.string().meta({ xpath: "//p[@class='entry__pvpteam__name--dc']" }),
+  name: z
+    .string()
+    .meta({ xpath: "//h2[@class='entry__pvpteam__name--team']/text()" }),
+  dcname: z
+    .string()
+    .meta({ xpath: "//p[@class='entry__pvpteam__name--dc']/text()" }),
   crest: z.array(z.url()).meta({
-    xpath: "//div[@class='entry__pvpteam__crest__image']/img",
-    attribute: "src",
+    xpath: "//div[@class='entry__pvpteam__crest__image']/img/@src",
   }),
   members: z
     .array(
       z.object({
         id: z.string().meta({
-          xpath: "/a[@class='entry__bg']",
-          attribute: "href",
+          xpath: "/a[@class='entry__bg']/@href",
         }),
-        name: z.string().meta({ xpath: "//p[@class='entry__name']" }),
+        name: z.string().meta({ xpath: "//p[@class='entry__name']/text()" }),
         avatar: z.url().meta({
-          xpath: "//div[@class='entry__chara__face']/img",
-          attribute: "src",
+          xpath: "//div[@class='entry__chara__face']/img/@src",
         }),
         worldname: z
           .string()
           .regex(/(\w+) \[\w+\]/)
           .transform(
-            (val) => val.match(/(\w+) \[\w+\]/)?.[1].trim() ?? val.trim()
+            (val) => val.match(/(\w+) \[\w+\]/)?.[1].trim() ?? val.trim(),
           )
           .meta({
-            xpath: "//p[@class='entry__world']",
+            xpath: "//p[@class='entry__world']/text()",
           }),
         dcname: z
           .string()
           .regex(/\w+ \[(\w+)\]/)
           .transform(
-            (val) => val.match(/\w+ \[(\w+)\]/)?.[1].trim() ?? val.trim()
+            (val) => val.match(/\w+ \[(\w+)\]/)?.[1].trim() ?? val.trim(),
           )
           .meta({
-            xpath: "//p[@class='entry__world']",
+            xpath: "//p[@class='entry__world']/text()",
           }),
         rank: z
           .object({
             name: z.string().meta({
               xpath:
-                "//ul[contains(@class, 'info')]/li/img[not(@class)]/following-sibling::span",
+                "//ul[contains(@class, 'info')]/li/img[not(@class)]/following-sibling::span/text()",
             }),
             icon: z.url().meta({
-              xpath: "//ul[contains(@class, 'info')]/li[span]/img[not(@class)]",
-              attribute: "src",
+              xpath:
+                "//ul[contains(@class, 'info')]/li[span]/img[not(@class)]/@src",
             }),
           })
           .optional(),
@@ -58,41 +59,38 @@ export const profile = z.object({
               .string()
               .regex(/(\w+) \/ \w+/)
               .transform(
-                (val) => val.match(/(\w+) \/ \w+/)?.[1].trim() ?? val.trim()
+                (val) => val.match(/(\w+) \/ \w+/)?.[1].trim() ?? val.trim(),
               )
               .meta({
-                xpath: "//li[@class='js__tooltip']",
-                attribute: "data-tooltip",
+                xpath: "//li[@class='js__tooltip']/@data-tooltip",
               }),
             rank: z.object({
               name: z
                 .string()
                 .regex(/\w+ \/ (\w+)/)
                 .transform(
-                  (val) => val.match(/\w+ \/ (\w+)/)?.[1].trim() ?? val.trim()
+                  (val) => val.match(/\w+ \/ (\w+)/)?.[1].trim() ?? val.trim(),
                 )
                 .meta({
-                  xpath: "//li[@class='js__tooltip']",
-                  attribute: "data-tooltip",
+                  xpath: "//li[@class='js__tooltip']/@data-tooltip",
                 }),
               icon: z.url().meta({
-                xpath: "//li[@class='js__tooltip']/img",
-                attribute: "src",
+                xpath: "//li[@class='js__tooltip']/img/@src",
               }),
             }),
           })
           .optional(),
         matches: z.coerce.number().optional().meta({
           xpath:
-            "//ul[contains(@class, '__info')]/li/img[contains(@class, 'entry__pvpteam__battle__icon')]/following-sibling::span",
+            "//ul[contains(@class, '__info')]/li/img[contains(@class, 'entry__pvpteam__battle__icon')]/following-sibling::span/text()",
         }),
-      })
+      }),
     )
     .meta({
       xpath: "//div[@class='pvpteam__member']/div[@class='entry']",
     }),
   formed: z.string().pipe(z.coerce.date()).meta({
-    xpath: "//span[@class='entry__pvpteam__data--formed']/span",
+    xpath: "//span[@class='entry__pvpteam__data--formed']/span/text()",
   }),
 });
 
@@ -116,21 +114,21 @@ export const entries = resolveSchema(
           .regex(/lodestone\/pvpteam\/(\S+)\//)
           .transform(
             (val) =>
-              val.match(/lodestone\/pvpteam\/(\S+)\//)?.[1].trim() ?? val.trim()
+              val.match(/lodestone\/pvpteam\/(\S+)\//)?.[1].trim() ??
+              val.trim(),
           )
           .meta({
-            xpath: "/a",
-            attribute: "href",
+            xpath: "/a[@class='entry__block']/@href",
           }),
-        name: z.string().meta({ xpath: "//p[@class='entry__name']" }),
-        dcname: z.string().meta({ xpath: "//p[@class='entry__world']" }),
+        name: z.string().meta({ xpath: "//p[@class='entry__name']/text()" }),
+        dcname: z.string().meta({ xpath: "//p[@class='entry__world']/text()" }),
         crest: z.array(z.url()).meta({
-          xpath: "//div[@class='entry__pvpteam__search__crest__image']/img",
-          attribute: "src",
+          xpath:
+            "//div[@class='entry__pvpteam__search__crest__image']/img/@src",
         }),
-      })
+      }),
     )
     .meta({
       xpath: "//div[@class='ldst__window']//div[@class='entry']",
-    })
+    }),
 );

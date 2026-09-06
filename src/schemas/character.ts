@@ -7,80 +7,80 @@ export const profile = resolveSchema(
   z.object({
     name: z.string().meta({ xpath: "//p[@class='frame__chara__name']/text()" }),
     avatar: z.url().meta({
-      xpath: "//div[@class='frame__chara__face']/img",
-      attribute: "src",
+      xpath: "//div[@class='frame__chara__face']/img/@src",
     }),
     worldname: z
       .string()
       .regex(/(\w+) \[\w+\]/)
       .transform((val) => val.match(/(\w+) \[\w+\]/)?.[1].trim() as string)
       .meta({
-        xpath: "//p[@class='entry__freecompany__gc'][2]",
+        xpath: "//p[@class='entry__freecompany__gc'][2]/text()",
       }),
     dcname: z
       .string()
       .regex(/\w+ \[(\w+)\]/)
       .transform((val) => val.match(/\w+ \[(\w+)\]/)?.[1].trim() as string)
       .meta({
-        xpath: "//p[@class='entry__freecompany__gc'][2]",
+        xpath: "//p[@class='entry__freecompany__gc'][2]/text()",
       }),
     portrait: z
       .url()
       .meta({
-        xpath: "//div[@class='character__detail__image']//img",
-        attribute: "src",
+        xpath: "//div[@class='character__detail__image']//img/@src",
       })
       .optional(),
     title: z.string().meta({ xpath: "//p[@class='frame__chara__title']" }),
     bio: z
       .string()
-      .meta({ xpath: "//div[@class='character__selfintroduction']" }),
+      .meta({ xpath: "//div[@class='character__selfintroduction']/text()" }),
     race: z
       .string()
       .regex(new RegExp(`^(${Object.keys(Race).join("|")})`))
       .transform(
         (val) =>
           val.match(new RegExp(`^(${Object.keys(Race).join("|")})`))?.[1] ??
-          val.trim()
+          val.trim(),
       )
       .meta({
         xpath:
-          "//div[@class='character__profile__data__detail']/div//p[@class='character-block__name']",
+          "//div[@class='character__profile__data__detail']/div//p[@class='character-block__name']/text()",
       }),
     clan: z
       .string()
       .regex(
         new RegExp(
-          `^(${Object.keys(Race).join("|")})\\s*(${Object.keys(Tribe).join("|")})`
-        )
+          `^(${Object.keys(Race).join("|")})\\s*(${Object.keys(Tribe).join("|")})`,
+        ),
       )
       .transform(
         (val) =>
           val.match(
             new RegExp(
-              `^(${Object.keys(Race).join("|")})\\s*(${Object.keys(Tribe).join("|")})`
-            )
-          )?.[2] as string
+              `^(${Object.keys(Race).join("|")})\\s*(${Object.keys(Tribe).join("|")})`,
+            ),
+          )?.[2] as string,
       )
       .meta({
         xpath:
-          "//div[@class='character__profile__data__detail']/div//p[@class='character-block__name']",
+          "//div[@class='character__profile__data__detail']/div//p[@class='character-block__name']/text()",
       }),
     gender: z
       .string()
       .transform((val) => (val.includes("♀") ? "Female" : "Male"))
       .meta({
         xpath:
-          "//div[@class='character__profile__data__detail']/div[1]//p[@class='character-block__name']",
+          "//div[@class='character__profile__data__detail']/div[1]//p[@class='character-block__name']/text()",
       }),
-    nameday: z.string().meta({ xpath: "//p[@class='character-block__birth']" }),
+    nameday: z
+      .string()
+      .meta({ xpath: "//p[@class='character-block__birth']/text()" }),
     guardian: z.string().meta({
       xpath:
-        "//div[@class='character__profile__data__detail']/div[2]//p[@class='character-block__name']",
+        "//div[@class='character__profile__data__detail']/div[2]//p[@class='character-block__name']/text()",
     }),
     citystate: z.string().meta({
       xpath:
-        "//div[@class='character__profile__data__detail']/div[3]//p[@class='character-block__name']",
+        "//div[@class='character__profile__data__detail']/div[3]//p[@class='character-block__name']/text()",
     }),
     grandcompany: z
       .object({
@@ -88,18 +88,18 @@ export const profile = resolveSchema(
           .string()
           .regex(/(\w+) \/ \w+/)
           .transform(
-            (val) => val.match(/(\w+) \/ \w+/)?.[1].trim() ?? val.trim()
+            (val) => val.match(/(\w+) \/ \w+/)?.[1].trim() ?? val.trim(),
           )
           .meta({
             xpath:
-              "//div[@class='character__profile__data__detail']/div[4]//p[@class='character-block__name']",
+              "//div[@class='character__profile__data__detail']/div[4]//p[@class='character-block__name']/text()",
           }),
         rank: z.object({
           name: z
             .string()
             .regex(/\w+ \/ (\w+)/)
             .transform(
-              (val) => val.match(/\w+ \/ (\w+)/)?.[1].trim() ?? val.trim()
+              (val) => val.match(/\w+ \/ (\w+)/)?.[1].trim() ?? val.trim(),
             )
             .meta({
               xpath:
@@ -107,8 +107,7 @@ export const profile = resolveSchema(
             }),
           icon: z.url().meta({
             xpath:
-              "//div[@class='character__profile__data__detail']/div[4]/img",
-            attribute: "src",
+              "//div[@class='character__profile__data__detail']/div[4]/img/@src",
           }),
         }),
       })
@@ -121,18 +120,16 @@ export const profile = resolveSchema(
           .transform(
             (val) =>
               val.match(/lodestone\/freecompany\/(\S+)\//)?.[1].trim() ??
-              val.trim()
+              val.trim(),
           )
           .meta({
-            xpath: "//div[@class='character__freecompany__name']//a",
-            attribute: "href",
+            xpath: "//div[@class='character__freecompany__name']//a/@href",
           }),
         name: z.string().meta({
-          xpath: "//div[@class='character__freecompany__name']//a",
+          xpath: "//div[@class='character__freecompany__name']//a/text()",
         }),
         crest: z.url().array().meta({
-          xpath: "//div[@class='character__freecompany__crest']//img",
-          attribute: "src",
+          xpath: "//div[@class='character__freecompany__crest']//img/@src",
         }),
       })
       .optional(),
@@ -143,22 +140,21 @@ export const profile = resolveSchema(
           .regex(/lodestone\/pvpteam\/(\S+)\//)
           .transform(
             (val) =>
-              val.match(/lodestone\/pvpteam\/(\S+)\//)?.[1].trim() ?? val.trim()
+              val.match(/lodestone\/pvpteam\/(\S+)\//)?.[1].trim() ??
+              val.trim(),
           )
           .meta({
-            xpath: "//div[@class='character__pvpteam__name']//a",
-            attribute: "href",
+            xpath: "//div[@class='character__pvpteam__name']//a/@href",
           }),
         name: z.string().meta({
-          xpath: "//div[@class='character__pvpteam__name']//a",
+          xpath: "//div[@class='character__pvpteam__name']//a/text()",
         }),
         crest: z.url().array().meta({
-          xpath: "//div[@class='character__pvpteam__crest']//img",
-          attribute: "src",
+          xpath: "//div[@class='character__pvpteam__crest']//img/@src",
         }),
       })
       .optional(),
-  })
+  }),
 );
 
 export const query = z.object({
@@ -207,58 +203,53 @@ export const entries = resolveSchema(
           .transform(
             (val) =>
               val.match(/lodestone\/character\/(\d+)\//)?.[1].trim() ??
-              val.trim()
+              val.trim(),
           )
           .meta({
-            xpath: "/a[@class='entry__link']",
-            attribute: "href",
+            xpath: "/a[@class='entry__link']/@href",
           }),
-        name: z.string().meta({ xpath: "//p[@class='entry__name']" }),
+        name: z.string().meta({ xpath: "//p[@class='entry__name']/text()" }),
         avatar: z.url().meta({
-          xpath: "//div[@class='entry__chara__face']/img",
-          attribute: "src",
+          xpath: "//div[@class='entry__chara__face']/img/@src",
         }),
         worldname: z
           .string()
           .regex(/(\w+) \[\w+\]/)
           .meta({
-            xpath: "//p[@class='entry__world'][2]",
+            xpath: "//p[@class='entry__world'][2]/text()",
           }),
         dcname: z
           .string()
           .regex(/\w+ \[(\w+)\]/)
           .meta({
-            xpath: "//p[@class='entry__world'][2]",
+            xpath: "//p[@class='entry__world'][2]/text()",
           }),
         lang: z
           .array(z.string())
-          .meta({ xpath: "//div[@class='entry__chara__lang']" }),
+          .meta({ xpath: "//div[@class='entry__chara__lang']/text()" }),
         grandcompany: z
           .object({
             name: z
               .string()
               .regex(/(\w+) \/ \w+/)
               .transform(
-                (val) => val.match(/(\w+) \/ \w+/)?.[1].trim() ?? val.trim()
+                (val) => val.match(/(\w+) \/ \w+/)?.[1].trim() ?? val.trim(),
               )
               .meta({
-                xpath: "//li[@class='js__tooltip']",
-                attribute: "data-tooltip",
+                xpath: "//li[@class='js__tooltip']/@data-tooltip",
               }),
             rank: z.object({
               name: z
                 .string()
                 .regex(/\w+ \/ (\w+)/)
                 .transform(
-                  (val) => val.match(/\w+ \/ (\w+)/)?.[1].trim() ?? val.trim()
+                  (val) => val.match(/\w+ \/ (\w+)/)?.[1].trim() ?? val.trim(),
                 )
                 .meta({
-                  xpath: "//li[@class='js__tooltip']",
-                  attribute: "data-tooltip",
+                  xpath: "//li[@class='js__tooltip']/@data-tooltip",
                 }),
               icon: z.url().meta({
-                xpath: "//li[@class='js__tooltip']/img",
-                attribute: "src",
+                xpath: "//li[@class='js__tooltip']/img/@src",
               }),
             }),
           })
@@ -271,24 +262,22 @@ export const entries = resolveSchema(
               .transform(
                 (val) =>
                   val.match(/lodestone\/freecompany\/(\d+)\//)?.[1].trim() ??
-                  val.trim()
+                  val.trim(),
               )
               .meta({
-                xpath: "/a[@class='entry__freecompany__link']",
-                attribute: "href",
+                xpath: "/a[@class='entry__freecompany__link']/@href",
               }),
             name: z.string().meta({
-              xpath: "/a[@class='entry__freecompany__link']/span",
+              xpath: "/a[@class='entry__freecompany__link']/span/text()",
             }),
             crest: z.array(z.url()).meta({
-              xpath: "/a[@class='entry__freecompany__link']/img",
-              attribute: "src",
+              xpath: "/a[@class='entry__freecompany__link']/img/@src",
             }),
           })
           .optional(),
-      })
+      }),
     )
     .meta({
       xpath: "//div[@class='ldst__window']//div[@class='entry']",
-    })
+    }),
 );
