@@ -1,33 +1,32 @@
 {
   "name": "@xivapi/lodestone-css-selectors",
-  "version": "0.1.0",
-  "private": true,
-  "description": "A collection of Lodestone CSS selectors and XPath expressions",
+  "version": "0.52.1",
+  "description": "A Zod collection of Lodestone CSS selectors",
+  "homepage": "https://github.com/xivapi/lodestone-css-selectors",
+  "bugs": "https://github.com/xivapi/lodestone-css-selectors/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xivapi/lodestone-css-selectors.git"
+  },
   "type": "module",
   "exports": {
-    ".": "./src/index.ts",
-    "./character.json": "./json/character.json",
-    "./cwls.json": "./json/cwls.json",
-    "./freecompany.json": "./json/freecompany.json",
-    "./linkshell.json": "./json/linkshell.json",
-    "./metadata.json": "./json/metadata.json",
-    "./pvpteam.json": "./json/pvpteam.json"
+    "./*": "./src/schemas/*",
+    "./metadata": "./src/metadata.ts",
+    "./zod": "./src/zod.d.ts",
+    "./json/*": "./json/*"
   },
-  "main": "./src/index.ts",
   "scripts": {
     "build": "tsx src/scripts/build.ts",
     "format": "biome format --write",
     "lint": "biome check --write"
   },
   "dependencies": {
-    "@miichom/xpath2css": "^0.1.7",
-    "zod": "^4.5.4"
+    "zod": "^4.6.5"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.5.12",
-    "@changesets/cli": "^3.0.2",
+    "@biomejs/biome": "^2.5.14",
     "@tsconfig/node22": "^22.0.6",
-    "@types/node": "^26.4.1",
+    "@types/node": "^26.6.1",
     "consola": "^3.4.2",
     "picocolors": "^1.1.1",
     "std-env": "^4.2.0",

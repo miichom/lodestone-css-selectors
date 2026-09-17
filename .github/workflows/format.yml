@@ -11,24 +11,24 @@ concurrency:
 
 jobs:
   format:
-    if: github.repository == 'xivapi/xivapi-js'
+    if: github.repository_owner == 'xivapi'
     runs-on: ubuntu-latest
     permissions:
       contents: write
     env:
       NODE_OPTIONS: "--max_old_space_size=4096"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: ${{ github.head_ref || github.ref_name }}
           
       - name: Setup PNPM
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
-          node-version: 22
+          node-version: 24.19.0
           cache: "pnpm"
 
       - name: Install dependencies
