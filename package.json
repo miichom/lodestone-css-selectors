@@ -8,6 +8,7 @@
     "type": "git",
     "url": "https://github.com/xivapi/lodestone-css-selectors.git"
   },
+  "license": "UNLICENSED",
   "type": "module",
   "exports": {
     "./*": "./src/schemas/*",
