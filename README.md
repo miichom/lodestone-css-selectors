@@ -3,7 +3,7 @@
 A ready-to-use collection of CSS selectors and Zod schemas for scraping data from the Final Fantasy XIV Lodestone. Designed for fast, lightweight parsing across TypeScript, Python, Go, Rust, and other languages.
 
 > [!IMPORTANT]
-> The Lodestone serves completely different markup to desktop and mobile clients. These selectors are strictly tailored to the mobile DOM structure and will not match desktop responses.
+> [The Lodestone](https://na.finalfantasyxiv.com/lodestone/) serves completely different markup to desktop and mobile clients. These selectors are strictly tailored to the mobile DOM structure and will not match desktop responses.
 
 ### Key Features
 
