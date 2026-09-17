@@ -1,50 +1,20 @@
 {
-  "pagination": {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "type": "object",
-    "properties": {
-      "start": {
-        "type": "string",
-        "xpath": "//a[@class='btn__pager__prev--all']/text()",
-        "selector": "a.btn__pager__prev--all"
-      },
-      "previous": {
-        "type": "string",
-        "xpath": "//a[@class='btn__pager__prev']/text()",
-        "selector": "a.btn__pager__prev"
-      },
-      "current": {
-        "xpath": "//a[@class='btn__pager__current']/text()",
-        "selector": "a.btn__pager__current",
-        "type": "string",
-        "pattern": "(\\d+)"
-      },
-      "pages": {
-        "xpath": "//a[@class='btn__pager__current']/text()",
-        "selector": "a.btn__pager__current",
-        "type": "string",
-        "pattern": "(\\d+)"
-      },
-      "next": {
-        "type": "string",
-        "xpath": "//a[@class='btn__pager__next']/text()",
-        "selector": "a.btn__pager__next"
-      },
-      "end": {
-        "type": "string",
-        "xpath": "//a[@class='btn__pager__next--all']/text()",
-        "selector": "a.btn__pager__next--all"
-      }
-    },
-    "required": [
-      "start",
-      "previous",
-      "current",
-      "pages",
-      "next",
-      "end"
-    ],
-    "xpath": "//ul[@class='btn__pager']",
-    "selector": "ul.btn__pager"
+  "version": "0.52.1",
+  "headers": {
+    "User-Agent": "Mozilla/5.0 (Android 16; Mobile; rv:147.0) Gecko/147.0 Firefox/147.0 (Compatible; lodestone-css-selectors/0.52.1; +https://github.com/xivapi/lodestone-css-selectors)"
+  },
+  "endpoints": {
+    "/character/profile.json": "https://%s.finalfantasyxiv.com/lodestone/character/%d/",
+    "/character/gearset.json": "https://%s.finalfantasyxiv.com/lodestone/character/%d/equipment/tooltip/%d/",
+    "/cwls/profile.json": "https://%s.finalfantasyxiv.com/lodestone/crossworld_linkshell/%s/",
+    "/freecompany/profile.json": "https://%s.finalfantasyxiv.com/lodestone/freecompany/%d/",
+    "/freecompany/members.json": "https://%s.finalfantasyxiv.com/lodestone/freecompany/%d/member/",
+    "/linkshell/profile.json": "https://%s.finalfantasyxiv.com/lodestone/linkshell/%d/",
+    "/pvpteam/profile.json": "https://%s.finalfantasyxiv.com/lodestone/pvpteam/%s/",
+    "/search/character.json": "https://%s.finalfantasyxiv.com/lodestone/character/",
+    "/search/cwls.json": "https://%s.finalfantasyxiv.com/lodestone/crossworld_linkshell/",
+    "/search/freecompany.json": "https://%s.finalfantasyxiv.com/lodestone/freecompany/",
+    "/search/linkshell.json": "https://%s.finalfantasyxiv.com/lodestone/linkshell/",
+    "/search/pvpteam.json": "https://%s.finalfantasyxiv.com/lodestone/pvpteam/"
   }
 }
