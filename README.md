@@ -1,22 +1,25 @@
-# Lodestone Selectors
+# Lodestone CSS Selectors
 
-A ready-to-use collection of CSS selectors, XPath expressions, and Zod schemas for scraping data from the Final Fantasy XIV Lodestone. Designed for fast, lightweight parsing across any programming language.
+A ready-to-use collection of CSS selectors and Zod schemas for scraping data from the Final Fantasy XIV Lodestone. Designed for fast, lightweight parsing across TypeScript, Python, Go, Rust, and other languages.
+
+> [!IMPORTANT]
+> The Lodestone serves completely different markup to desktop and mobile clients. These selectors are strictly tailored to the mobile DOM structure and will not match desktop responses.
+
+### Key Features
+
+- **Mobile DOM Tailored:** Built explicitly for the Lodestone's mobile views, which offer a cleaner and more consistent layout for scraping.
+- **Type Safety & Portability:** Schemas are written in Zod for native TypeScript support and automatically compiled into standard JSON Schemas for non-TypeScript environments.
+- **Lightweight & DOMless:** Fully compatible with fast HTML parsers (such as Cheerio, Happy DOM, or BeautifulSoup) without requiring a heavy, headless browser instance.
 
 ## Quick Start
 
-If you are incorporating these selectors into another project, you can add this repository using Git submodules. This allows you to track updates without manually copying files.
+Add this repository to your project to keep selectors updated without manual file management:
 
 ```sh
-git submodule add https://github.com/miichom/lodestone-css-selectors.git <path>
+git submodule add https://github.com/xivapi/lodestone-css-selectors.git <path>
 ```
 
-For more details on managing submodules, check out the [Official Git Submodules Documentation](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
-
-## Key Features
-
-- **XPath & CSS Selectors:** Choose standard CSS selectors for fast direct matching, or XPath for complex text matching and parent-node traversal.
-- **Zod & JSON Schemas:** Written in Zod for TypeScript type safety, and automatically compiled to standard JSON for non-TypeScript environments (Python, Go, Rust, etc.).
-- **Lightweight & DOMless:** Optimized for fast HTML parsers like Cheerio or Happy DOM without needing a full browser.
+(For details on managing submodules, see the [Official Git Submodules Documentation](https://git-scm.com/book/en/v2/Git-Tools-Submodules)).
 
 ## Project Lineage
 
@@ -26,4 +29,5 @@ This repository inherits its design from [miichom/lodestone](https://github.com/
 
 Contributions are welcome! If you want to update or add new selectors, simply submit a Pull Request with your changes to the TypeScript/Zod source schemas.
 
-> **Note:** You don't need to manually recompile the JSON output. The CI pipeline generates and commits the updated JSON files automatically when merged.
+> [!NOTE]
+> You don't need to manually recompile the JSON output. The CI pipeline generates and commits the updated JSON files automatically when merged.
